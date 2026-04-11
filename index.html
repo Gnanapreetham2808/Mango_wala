@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EuropeMangoWale 🥭 — Prebook 2026 Batch 01</title>
+  <meta name="description" content="Prebook your premium Alphonso & Kesar mangoes for 2026 Season. Fresh from India, delivered in Europe." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --mango-deep:    #d4500a;
+      --mango-orange:  #f97316;
+      --mango-amber:   #f59e0b;
+      --mango-yellow:  #fbbf24;
+      --mango-light:   #fef3c7;
+      --glass-bg:      rgba(255, 255, 255, 0.13);
+      --glass-border:  rgba(255, 255, 255, 0.30);
+      --glass-shadow:  0 8px 32px rgba(180, 70, 0, 0.22);
+      --text-dark:     #1a0a00;
+      --text-mid:      #4a2500;
+      --text-light:    rgba(255, 255, 255, 0.92);
+      --input-bg:      rgba(255, 255, 255, 0.88);
+      --radius-lg:     18px;
+      --radius-md:     12px;
+      --radius-sm:     8px;
+      --transition:    0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f97316 0%, #f59e0b 35%, #fbbf24 65%, #fb923c 100%);
+      background-attachment: fixed;
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ─── Animated Background Blobs ────────────────────────────── */
+    .bg-blobs {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+      animation: float 12s ease-in-out infinite;
+    }
+    .blob-1 { width: 500px; height: 500px; background: #fb923c; top: -120px; left: -150px; animation-delay: 0s; }
+    .blob-2 { width: 400px; height: 400px; background: #fcd34d; bottom: -100px; right: -100px; animation-delay: -4s; }
+    .blob-3 { width: 300px; height: 300px; background: #f87171; top: 40%; left: 60%; animation-delay: -8s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50%       { transform: translateY(-30px) scale(1.06); }
+    }
+
+    /* ─── Page Wrapper ──────────────────────────────────────────── */
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 40px 16px 80px;
+    }
+
+    /* ─── Hero Banner ───────────────────────────────────────────── */
+    .hero {
+      text-align: center;
+      padding: 0 16px 48px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.22);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.40);
+      border-radius: 999px;
+      padding: 6px 18px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: white;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1.12;
+      text-shadow: 0 2px 20px rgba(180,70,0,0.30);
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 20px;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.88);
+      max-width: 540px;
+      margin: 0 auto 32px;
+    }
+
+    /* ─── Info Pills ────────────────────────────────────────────── */
+    .info-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 0;
+    }
+
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: white;
+      box-shadow: 0 2px 12px rgba(180,70,0,0.12);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .pill:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(180,70,0,0.20); }
+    .pill-icon { font-size: 1.1em; }
+
+    /* ─── Features Strip ────────────────────────────────────────── */
+    .features-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      max-width: 760px;
+      margin: 48px auto;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: var(--radius-lg);
+      padding: 24px 16px;
+      text-align: center;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(180,70,0,0.18); }
+    .feature-icon { font-size: 2rem; margin-bottom: 10px; }
+    .feature-title { font-weight: 700; color: white; font-size: 0.9rem; margin-bottom: 4px; }
+    .feature-desc { font-size: 0.78rem; color: rgba(255,255,255,0.78); line-height: 1.5; }
+
+    /* ─── Pricing Cards ─────────────────────────────────────────── */
+    .pricing-section {
+      max-width: 540px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 16px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .price-card {
+      background: rgba(255,255,255,0.16);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.32);
+      border-radius: var(--radius-lg);
+      padding: 28px 20px;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .price-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(180,70,0,0.22); }
+    .price-card .mango-type { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.75); margin-bottom: 4px; }
+    .price-card .mango-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: white; margin-bottom: 8px; }
+    .price-card .price { font-size: 2rem; font-weight: 800; color: var(--mango-light); line-height: 1; }
+    .price-card .price-unit { font-size: 0.75rem; color: rgba(255,255,255,0.70); margin-top: 4px; }
+    .price-card .mango-emoji { font-size: 2.2rem; margin-bottom: 8px; }
+
+    /* ─── Main Form Card ────────────────────────────────────────── */
+    .form-section {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      border-radius: 24px;
+      box-shadow:
+        0 8px 40px rgba(180, 70, 0, 0.20),
+        0 2px 0px rgba(255,255,255,0.20) inset,
+        0 -2px 0px rgba(180,70,0,0.10) inset;
+      padding: 48px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+    }
+
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .form-subtitle {
+      text-align: center;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      margin-bottom: 36px;
+    }
+
+    /* ─── Form Layout ───────────────────────────────────────────── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.90);
+      letter-spacing: 0.02em;
+    }
+
+    label .required {
+      color: #fcd34d;
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--input-bg);
+      border: 1.5px solid rgba(255,255,255,0.50);
+      border-radius: var(--radius-md);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      color: var(--text-dark);
+      transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input[type="number"] { -moz-appearance: textfield; }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button { opacity: 1; }
+
+    input::placeholder, textarea::placeholder { color: #a37050; }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--mango-orange);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(249,115,22,0.18), 0 2px 8px rgba(249,115,22,0.10);
+    }
+
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a37050' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 40px;
+    }
+
+    textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+    /* Phone row */
+    .phone-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 10px;
+    }
+
+    /* Mango quantity inputs with emoji labels */
+    .qty-group {
+      position: relative;
+    }
+    .qty-label-inner {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .qty-badge {
+      font-size: 0.72rem;
+      background: rgba(255,255,255,0.25);
+      color: white;
+      border-radius: 6px;
+      padding: 2px 7px;
+      font-weight: 600;
+    }
+
+    /* Checkbox */
+    .checkbox-group {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .checkbox-group:hover { background: rgba(255,255,255,0.16); }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      cursor: pointer;
+      accent-color: var(--mango-orange);
+      margin-top: 2px;
+    }
+
+    .checkbox-label {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.90);
+      line-height: 1.55;
+      cursor: pointer;
+    }
+    .checkbox-label strong { color: white; }
+
+    /* ─── Submit Button ──────────────────────────────────────────── */
+    .submit-btn {
+      grid-column: 1 / -1;
+      width: 100%;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--mango-yellow) 0%, var(--mango-orange) 55%, var(--mango-deep) 100%);
+      border: none;
+      border-radius: var(--radius-md);
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(217,90,10,0.40), 0 1px 0 rgba(255,255,255,0.20) inset;
+      transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 50%);
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 8px 28px rgba(217,90,10,0.50), 0 1px 0 rgba(255,255,255,0.20) inset;
+    }
+
+    .submit-btn:active:not(:disabled) {
+      transform: translateY(0) scale(0.99);
+      box-shadow: 0 2px 10px rgba(217,90,10,0.35);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.70;
+      cursor: not-allowed;
+    }
+
+    /* ─── Status Messages ───────────────────────────────────────── */
+    .status-msg {
+      grid-column: 1 / -1;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: center;
+      animation: fadeSlideIn 0.4s ease;
+    }
+
+    .status-msg.visible { display: flex; }
+
+    .status-msg.success {
+      background: rgba(34,197,94,0.20);
+      border: 1.5px solid rgba(34,197,94,0.45);
+      color: #d1fae5;
+    }
+
+    .status-msg.error {
+      background: rgba(239,68,68,0.18);
+      border: 1.5px solid rgba(239,68,68,0.42);
+      color: #fee2e2;
+    }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Divider ───────────────────────────────────────────────── */
+    .form-divider {
+      grid-column: 1 / -1;
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.18);
+      margin: 4px 0;
+    }
+
+    .form-section-label {
+      grid-column: 1 / -1;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ─── Footer ────────────────────────────────────────────────── */
+    .footer {
+      text-align: center;
+      margin-top: 52px;
+      color: rgba(255,255,255,0.60);
+      font-size: 0.80rem;
+    }
+    .footer a { color: rgba(255,255,255,0.85); text-decoration: underline; }
+
+    /* ─── Scroll-in Animation ───────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.in-view { opacity: 1; transform: translateY(0); }
+
+    /* ─── Responsive ────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .glass-card { padding: 32px 22px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: 1; }
+      .checkbox-group { grid-column: 1; }
+      .submit-btn { grid-column: 1; }
+      .status-msg { grid-column: 1; }
+      .form-divider { grid-column: 1; }
+      .form-section-label { grid-column: 1; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .phone-row { grid-template-columns: 100px 1fr; }
+    }
+
+    @media (max-width: 400px) {
+      .hero-title { font-size: 2rem; }
+      .glass-card { padding: 26px 16px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Animated background blobs -->
+  <div class="bg-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="page-wrapper">
+
+    <!-- ── Hero ──────────────────────────────────────────────────── -->
+    <header class="hero fade-up">
+      <div class="hero-badge">
+        <span class="pill-icon">🌟</span> 2026 Season — Batch 01
+      </div>
+      <h1 class="hero-title">EuropeMangoWale 🥭</h1>
+      <p class="hero-subtitle">Europe's Finest Indian Mangoes, Delivered</p>
+      <p class="hero-desc">
+        The wait is finally over! EuropeMangoWale is thrilled to kick off the 2026 season
+        and bring you our very first wave of mango magic. Reserve your box before stocks run out!
+      </p>
+      <div class="info-pills">
+        <span class="pill"><span class="pill-icon">📅</span> Delivery: Apr 10–11</span>
+        <span class="pill"><span class="pill-icon">🚚</span> Limited Stock</span>
+        <span class="pill"><span class="pill-icon">💳</span> Pay at Collection</span>
+      </div>
+    </header>
+
+    <!-- ── Features ───────────────────────────────────────────────── -->
+    <div class="features-strip fade-up">
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <div class="feature-title">Premium Quality</div>
+        <div class="feature-desc">Hand-picked, grade-A mangoes guaranteed fresh every batch</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📍</div>
+        <div class="feature-title">Easy Pickup</div>
+        <div class="feature-desc">Convenient locations in Amsterdam, Rotterdam & Utrecht</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⏳</div>
+        <div class="feature-title">Seasonal &amp; Rare</div>
+        <div class="feature-desc">Limited availability — once they're gone, they're gone!</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <div class="feature-title">Pay on Pickup</div>
+        <div class="feature-desc">No upfront payment needed — pay only at collection</div>
+      </div>
+    </div>
+
+    <!-- ── Pricing ────────────────────────────────────────────────── -->
+    <section class="pricing-section fade-up" aria-label="Pricing">
+      <p class="section-label">Pricing — 2026 Batch 01</p>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="mango-emoji">🥭</div>
+          <div class="mango-type">Variety</div>
+          <div class="mango-name">Alphonso</div>
+          <div class="price">€37</div>
+          <div class="price-unit">approx 3 kg / box</div>
+        </div>
+        <div class="price-card">
+          <div class="mango-emoji">🥭</div>
+          <div class="mango-type">Variety</div>
+          <div class="mango-name">Kesar</div>
+          <div class="price">€37</div>
+          <div class="price-unit">approx 3 kg / box</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Prebooking Form ─────────────────────────────────────────── -->
+    <section class="form-section fade-up" aria-label="Prebooking form">
+      <div class="glass-card">
+        <h2 class="form-title">Reserve Your Mangoes</h2>
+        <p class="form-subtitle">Fill in the details below and we'll confirm your prebook.</p>
+
+        <form id="prebook-form" novalidate>
+          <div class="form-grid">
+
+            <!-- Section: Personal Info -->
+            <p class="form-section-label">Personal Information</p>
+
+            <!-- Full Name -->
+            <div class="form-group full">
+              <label for="name">Full Name <span class="required">*</span></label>
+              <input type="text" id="name" name="name" placeholder="Enter your full name" required autocomplete="name" />
+            </div>
+
+            <!-- Email -->
+            <div class="form-group full">
+              <label for="email">Email Address <span class="required">*</span></label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required autocomplete="email" />
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group full">
+              <label for="phone">Phone Number <span class="required">*</span></label>
+              <div class="phone-row">
+                <select id="country-code" name="countryCode" aria-label="Country code">
+                  <option value="+31">🇳🇱 +31</option>
+                  <option value="+32">🇧🇪 +32</option>
+                  <option value="+49">🇩🇪 +49</option>
+                  <option value="+33">🇫🇷 +33</option>
+                  <option value="+44">🇬🇧 +44</option>
+                  <option value="+34">🇪🇸 +34</option>
+                  <option value="+39">🇮🇹 +39</option>
+                  <option value="+48">🇵🇱 +48</option>
+                  <option value="+91">🇮🇳 +91</option>
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+61">🇦🇺 +61</option>
+                  <option value="+971">🇦🇪 +971</option>
+                </select>
+                <input type="tel" id="phone" name="phone" placeholder="6 12 34 56 78" required autocomplete="tel-national" />
+              </div>
+            </div>
+
+            <hr class="form-divider" />
+
+            <!-- Section: Order -->
+            <p class="form-section-label">Your Order</p>
+
+            <!-- Alphonso -->
+            <div class="form-group qty-group">
+              <label for="alphonso">
+                <span class="qty-label-inner">
+                  🥭 Alphonso Boxes <span class="qty-badge">€37 / box</span>
+                </span>
+              </label>
+              <input type="number" id="alphonso" name="alphonso" min="0" max="50" value="0" placeholder="0" />
+            </div>
+
+            <!-- Kesar -->
+            <div class="form-group qty-group">
+              <label for="kesar">
+                <span class="qty-label-inner">
+                  🥭 Kesar Boxes <span class="qty-badge">€37 / box</span>
+                </span>
+              </label>
+              <input type="number" id="kesar" name="kesar" min="0" max="50" value="0" placeholder="0" />
+            </div>
+
+            <!-- Pickup Location -->
+            <div class="form-group full">
+              <label for="pickup">Pickup Location <span class="required">*</span></label>
+              <select id="pickup" name="pickup" required>
+                <option value="" disabled selected>— Select your pickup city —</option>
+                <option value="Amsterdam">📍 Amsterdam</option>
+                <option value="Rotterdam">📍 Rotterdam</option>
+                <option value="Utrecht">📍 Utrecht</option>
+              </select>
+            </div>
+
+            <hr class="form-divider" />
+
+            <!-- Section: Extra -->
+            <p class="form-section-label">Additional Information</p>
+
+            <!-- Comments -->
+            <div class="form-group full">
+              <label for="comments">Comments / Special Requests</label>
+              <textarea id="comments" name="comments" placeholder="Any dietary requirements, delivery notes, or questions…"></textarea>
+            </div>
+
+            <!-- Payment Acknowledgement -->
+            <label class="checkbox-group">
+              <input type="checkbox" id="payment-ack" name="paymentAck" required />
+              <span class="checkbox-label">
+                <strong>Payment Acknowledgement *</strong><br />
+                I understand that payment will be accepted <strong>in cash or transfer during collection</strong>.
+                No advance payment is required to prebook.
+              </span>
+            </label>
+
+            <!-- Order Total (live) -->
+            <div class="form-group full" id="total-display" style="display:none; background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.22); border-radius:var(--radius-md); padding:14px 18px; color:white; font-weight:600; font-size:0.95rem; text-align:center;">
+              Estimated Total: <span id="total-amount" style="font-size:1.3rem; color:var(--mango-light); margin-left:4px;">€0</span>
+            </div>
+
+            <!-- Status message -->
+            <div id="status-msg" class="status-msg" role="alert" aria-live="polite"></div>
+
+            <!-- Submit -->
+            <button type="submit" class="submit-btn" id="submit-btn">
+              Prebook Now 🥭
+            </button>
+
+          </div><!-- /form-grid -->
+        </form>
+      </div>
+    </section>
+
+    <!-- ── Footer ─────────────────────────────────────────────────── -->
+    <footer class="footer fade-up">
+      <p>© 2026 EuropeMangoWale · Made with 🥭 for mango lovers across Europe</p>
+      <p style="margin-top:6px; font-size:0.75rem; opacity:0.7;">
+        Questions? Reach out before placing your prebook.
+      </p>
+    </footer>
+
+  </div><!-- /page-wrapper -->
+
+  <!-- ── JavaScript ──────────────────────────────────────────────── -->
+  <script>
+    'use strict';
+
+    /* ── Google Apps Script URL ─────────────────────────────────── */
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxXIk4wOHRhuwvueUt0Y5fbT7-O28XcNiVJ8kdZo3J2XIAHFy3s-nVpXSqcgOC7c9Bj6g/exec";
+
+    /* ── DOM references ─────────────────────────────────────────── */
+    const form        = document.getElementById('prebook-form');
+    const submitBtn   = document.getElementById('submit-btn');
+    const statusMsg   = document.getElementById('status-msg');
+    const alphonsoIn  = document.getElementById('alphonso');
+    const kesarIn     = document.getElementById('kesar');
+    const totalDisp   = document.getElementById('total-display');
+    const totalAmt    = document.getElementById('total-amount');
+
+    /* ── Live order total ───────────────────────────────────────── */
+    function updateTotal() {
+      const a = parseInt(alphonsoIn.value, 10) || 0;
+      const k = parseInt(kesarIn.value, 10)    || 0;
+      const total = (a + k) * 37;
+      if (total > 0) {
+        totalAmt.textContent = `€${total}`;
+        totalDisp.style.display = 'block';
+      } else {
+        totalDisp.style.display = 'none';
+      }
+    }
+
+    alphonsoIn.addEventListener('input', updateTotal);
+    kesarIn.addEventListener('input', updateTotal);
+
+    /* ── Status helper ──────────────────────────────────────────── */
+    function showStatus(type, message) {
+      statusMsg.textContent   = message;
+      statusMsg.className     = `status-msg ${type} visible`;
+      statusMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function clearStatus() {
+      statusMsg.className = 'status-msg';
+      statusMsg.textContent = '';
+    }
+
+    /* ── Form validation ────────────────────────────────────────── */
+    function validate(data) {
+      if (!data.name.trim())          return 'Please enter your full name.';
+      if (!data.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
+                                       return 'Please enter a valid email address.';
+      if (!data.phone.trim())         return 'Please enter your phone number.';
+      if (!data.pickup)               return 'Please select a pickup location.';
+      if (data.alphonso < 0 || data.kesar < 0)
+                                       return 'Box quantities cannot be negative.';
+      if (data.alphonso === 0 && data.kesar === 0)
+                                       return 'Please order at least 1 box of mangoes.';
+      const ack = document.getElementById('payment-ack');
+      if (!ack.checked)               return 'Please acknowledge the payment terms.';
+      return null;
+    }
+
+    /* ── Form submit ────────────────────────────────────────────── */
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      clearStatus();
+
+      const countryCode = document.getElementById('country-code').value;
+      const phoneRaw    = document.getElementById('phone').value.trim();
+
+      const data = {
+        name:      document.getElementById('name').value.trim(),
+        email:     document.getElementById('email').value.trim(),
+        phone:     `${countryCode} ${phoneRaw}`,
+        alphonso:  parseInt(alphonsoIn.value, 10) || 0,
+        kesar:     parseInt(kesarIn.value, 10)    || 0,
+        pickup:    document.getElementById('pickup').value,
+        comments:  document.getElementById('comments').value.trim(),
+        timestamp: new Date().toISOString(),
+      };
+
+      const validationError = validate(data);
+      if (validationError) {
+        showStatus('error', `⚠️ ${validationError}`);
+        return;
+      }
+
+      /* Disable button & show loading state */
+      submitBtn.disabled   = true;
+      submitBtn.textContent = 'Submitting… ⏳';
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method:  'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body:    JSON.stringify(data),
+        });
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const result = await response.text();
+
+        /* Some Apps Script deployments return JSON; handle both */
+        let success = true;
+        try {
+          const json = JSON.parse(result);
+          if (json.result === 'error') success = false;
+        } catch (_) { /* plain text response — treat as success */ }
+
+        if (success) {
+          showStatus('success', '🎉 Booking successful! We\'ll be in touch soon. See you at pickup!');
+          form.reset();
+          updateTotal();
+        } else {
+          throw new Error('Server returned error');
+        }
+      } catch (err) {
+        console.error('Submission error:', err);
+        showStatus('error', '❌ Something went wrong. Please try again or contact us directly.');
+      } finally {
+        submitBtn.disabled   = false;
+        submitBtn.textContent = 'Prebook Now 🥭';
+      }
+    });
+
+    /* ── Scroll-triggered fade-in ───────────────────────────────── */
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      }),
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll('.fade-up').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.08}s`;
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
