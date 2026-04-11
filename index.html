@@ -81,8 +81,8 @@
     /* ─── Hero Banner ───────────────────────────────────────────── */
     .hero {
       text-align: center;
-      padding: 0 16px 48px;
-      max-width: 680px;
+      padding: 0 24px 48px;
+      max-width: 900px;
       margin: 0 auto;
     }
 
@@ -105,15 +105,24 @@
 
     .hero-title {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2.8rem, 7vw, 5.2rem);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
       font-weight: 800;
-      background: linear-gradient(160deg, #ffffff 0%, #ffe49a 45%, #ffb347 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.1;
-      filter: drop-shadow(0 2px 18px rgba(0,0,0,0.55));
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+      background: none !important;
+      -webkit-background-clip: unset !important;
+      background-clip: unset !important;
+      line-height: 1.15;
+      text-shadow:
+        0 2px 4px rgba(0,0,0,0.85),
+        0 4px 20px rgba(0,0,0,0.55),
+        0 8px 40px rgba(0,0,0,0.35);
       margin-bottom: 0;
+      word-break: keep-all;
+      white-space: nowrap;
+    }
+    @media (max-width: 700px) {
+      .hero-title { font-size: clamp(1.8rem, 8vw, 2.6rem); white-space: normal; }
     }
 
     .hero-divider {
