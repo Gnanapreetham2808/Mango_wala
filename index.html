@@ -105,7 +105,7 @@
 
     .hero-title {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-size: min(5.8vw, 3.8rem);
       font-weight: 800;
       color: #ffffff !important;
       -webkit-text-fill-color: #ffffff !important;
@@ -118,11 +118,7 @@
         0 4px 20px rgba(0,0,0,0.55),
         0 8px 40px rgba(0,0,0,0.35);
       margin-bottom: 0;
-      word-break: keep-all;
       white-space: nowrap;
-    }
-    @media (max-width: 700px) {
-      .hero-title { font-size: clamp(1.8rem, 8vw, 2.6rem); white-space: normal; }
     }
 
     .hero-divider {
@@ -571,7 +567,7 @@
 
       <!-- Brand title -->
       <h1 class="hero-title">EuropeMangoWale 🥭</h1>
-      <div class="hero-divider"><span class="hero-divider-icon">🥭</span></div>
+      <div class="hero-divider"><span class="hero-divider-icon">✦</span></div>
       <p class="hero-subtitle">Europe's Finest Indian Mangoes, Delivered</p>
 
 
