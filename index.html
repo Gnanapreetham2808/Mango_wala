@@ -654,7 +654,7 @@
             <div class="form-group qty-group">
               <label for="alphonso">
                 <span class="qty-label-inner">
-                  🥭 Alphonso Boxes <span class="qty-badge">€37 / box</span>
+                  🥭 Alphonso Boxes <span class="qty-badge">€30 / box · ~3 kg</span>
                 </span>
               </label>
               <input type="number" id="alphonso" name="alphonso" min="0" max="50" value="0" placeholder="0" />
@@ -664,10 +664,30 @@
             <div class="form-group qty-group">
               <label for="kesar">
                 <span class="qty-label-inner">
-                  🥭 Kesar Boxes <span class="qty-badge">€37 / box</span>
+                  🥭 Kesar Boxes <span class="qty-badge">€30 / box · ~3 kg</span>
                 </span>
               </label>
               <input type="number" id="kesar" name="kesar" min="0" max="50" value="0" placeholder="0" />
+            </div>
+
+            <!-- Banginapally -->
+            <div class="form-group qty-group">
+              <label for="banginapally">
+                <span class="qty-label-inner">
+                  🥭 Banginapally Boxes <span class="qty-badge">€32 / box · ~3 kg</span>
+                </span>
+              </label>
+              <input type="number" id="banginapally" name="banginapally" min="0" max="50" value="0" placeholder="0" />
+            </div>
+
+            <!-- Rasalu -->
+            <div class="form-group qty-group">
+              <label for="rasalu">
+                <span class="qty-label-inner">
+                  🥭 Rasalu Boxes <span class="qty-badge">€34 / box · ~3 kg</span>
+                </span>
+              </label>
+              <input type="number" id="rasalu" name="rasalu" min="0" max="50" value="0" placeholder="0" />
             </div>
 
             <!-- Pickup Location -->
@@ -751,16 +771,23 @@
     const form        = document.getElementById('prebook-form');
     const submitBtn   = document.getElementById('submit-btn');
     const statusMsg   = document.getElementById('status-msg');
-    const alphonsoIn  = document.getElementById('alphonso');
-    const kesarIn     = document.getElementById('kesar');
-    const totalDisp   = document.getElementById('total-display');
-    const totalAmt    = document.getElementById('total-amount');
+    const alphonsoIn    = document.getElementById('alphonso');
+    const kesarIn       = document.getElementById('kesar');
+    const banginapallyIn = document.getElementById('banginapally');
+    const rasaluIn      = document.getElementById('rasalu');
+    const totalDisp     = document.getElementById('total-display');
+    const totalAmt      = document.getElementById('total-amount');
+
+    const PRICES = { alphonso: 30, kesar: 30, banginapally: 32, rasalu: 34 };
 
     /* ── Live order total ───────────────────────────────────────── */
     function updateTotal() {
-      const a = parseInt(alphonsoIn.value, 10) || 0;
-      const k = parseInt(kesarIn.value, 10)    || 0;
-      const total = (a + k) * 37;
+      const a = parseInt(alphonsoIn.value,     10) || 0;
+      const k = parseInt(kesarIn.value,        10) || 0;
+      const b = parseInt(banginapallyIn.value, 10) || 0;
+      const r = parseInt(rasaluIn.value,       10) || 0;
+      const total = a * PRICES.alphonso + k * PRICES.kesar
+                  + b * PRICES.banginapally + r * PRICES.rasalu;
       if (total > 0) {
         totalAmt.textContent = `€${total}`;
         totalDisp.style.display = 'block';
@@ -771,6 +798,8 @@
 
     alphonsoIn.addEventListener('input', updateTotal);
     kesarIn.addEventListener('input', updateTotal);
+    banginapallyIn.addEventListener('input', updateTotal);
+    rasaluIn.addEventListener('input', updateTotal);
 
     /* ── Status helper ──────────────────────────────────────────── */
     function showStatus(type, message) {
@@ -791,9 +820,9 @@
                                        return 'Please enter a valid email address.';
       if (!data.phone.trim())         return 'Please enter your phone number.';
       if (!data.pickup)               return 'Please select a pickup location.';
-      if (data.alphonso < 0 || data.kesar < 0)
+      if (data.alphonso < 0 || data.kesar < 0 || data.banginapally < 0 || data.rasalu < 0)
                                        return 'Box quantities cannot be negative.';
-      if (data.alphonso === 0 && data.kesar === 0)
+      if (data.alphonso === 0 && data.kesar === 0 && data.banginapally === 0 && data.rasalu === 0)
                                        return 'Please order at least 1 box of mangoes.';
       const ack = document.getElementById('payment-ack');
       if (!ack.checked)               return 'Please acknowledge the payment terms.';
@@ -809,15 +838,17 @@
       const phoneRaw    = document.getElementById('phone').value.trim();
 
       const data = {
-        orderId:   generateOrderId(),
-        name:      document.getElementById('name').value.trim(),
-        email:     document.getElementById('email').value.trim(),
-        phone:     ` ${countryCode} ${phoneRaw}`,
-        alphonso:  parseInt(alphonsoIn.value, 10) || 0,
-        kesar:     parseInt(kesarIn.value, 10)    || 0,
-        pickup:    document.getElementById('pickup').value,
-        comments:  document.getElementById('comments').value.trim(),
-        timestamp: new Date().toISOString(),
+        orderId:      generateOrderId(),
+        name:         document.getElementById('name').value.trim(),
+        email:        document.getElementById('email').value.trim(),
+        phone:        ` ${countryCode} ${phoneRaw}`,
+        alphonso:     parseInt(alphonsoIn.value,     10) || 0,
+        kesar:        parseInt(kesarIn.value,        10) || 0,
+        banginapally: parseInt(banginapallyIn.value, 10) || 0,
+        rasalu:       parseInt(rasaluIn.value,       10) || 0,
+        pickup:       document.getElementById('pickup').value,
+        comments:     document.getElementById('comments').value.trim(),
+        timestamp:    new Date().toISOString(),
       };
 
       const validationError = validate(data);
@@ -849,14 +880,19 @@
         } catch (_) { /* plain text response — treat as success */ }
 
         if (success) {
-          const total = (data.alphonso + data.kesar) * 37;
+          const total = data.alphonso     * PRICES.alphonso
+                      + data.kesar        * PRICES.kesar
+                      + data.banginapally * PRICES.banginapally
+                      + data.rasalu       * PRICES.rasalu;
           const lines = [
             `🎉 Booking confirmed! A confirmation email has been sent to ${data.email}.`,
             ``,
             `Order ID: ${data.orderId}`,
             `Name: ${data.name}`,
-            data.alphonso > 0 ? `Alphonso: ${data.alphonso} box${data.alphonso > 1 ? 'es' : ''}` : '',
-            data.kesar > 0    ? `Kesar: ${data.kesar} box${data.kesar > 1 ? 'es' : ''}` : '',
+            data.alphonso     > 0 ? `Alphonso: ${data.alphonso} box${data.alphonso > 1 ? 'es' : ''}` : '',
+            data.kesar        > 0 ? `Kesar: ${data.kesar} box${data.kesar > 1 ? 'es' : ''}` : '',
+            data.banginapally > 0 ? `Banginapally: ${data.banginapally} box${data.banginapally > 1 ? 'es' : ''}` : '',
+            data.rasalu       > 0 ? `Rasalu: ${data.rasalu} box${data.rasalu > 1 ? 'es' : ''}` : '',
             `Total: €${total}`,
             `Pickup: ${data.pickup}`,
           ].filter(Boolean).join('\n');
