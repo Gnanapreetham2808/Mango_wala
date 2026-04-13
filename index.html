@@ -304,9 +304,9 @@
       appearance: none;
     }
 
-    input[type="number"] { -moz-appearance: textfield; }
+    input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button { opacity: 1; }
+    input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 
     input::placeholder, textarea::placeholder { color: #a37050; }
 
@@ -657,7 +657,7 @@
                   🥭 Alphonso <span class="qty-badge">€30 / box (Approx 3 kg)</span>
                 </span>
               </label>
-              <input type="number" id="alphonso" name="alphonso" min="0" max="50" value="0" placeholder="0" />
+              <input type="number" id="alphonso" name="alphonso" min="0" max="50" step="1" value="0" placeholder="0" />
             </div>
 
             <!-- Kesar -->
@@ -667,7 +667,7 @@
                   🥭 Kesar <span class="qty-badge">€30 / box (Approx 3 kg)</span>
                 </span>
               </label>
-              <input type="number" id="kesar" name="kesar" min="0" max="50" value="0" placeholder="0" />
+              <input type="number" id="kesar" name="kesar" min="0" max="50" step="1" value="0" placeholder="0" />
             </div>
 
             <!-- Banginapally -->
@@ -677,7 +677,7 @@
                   🥭 Banginapally <span class="qty-badge">€32 / box (Approx 3 kg)</span>
                 </span>
               </label>
-              <input type="number" id="banginapally" name="banginapally" min="0" max="50" value="0" placeholder="0" />
+              <input type="number" id="banginapally" name="banginapally" min="0" max="50" step="1" value="0" placeholder="0" />
             </div>
 
             <!-- Rasalu -->
@@ -687,7 +687,7 @@
                   🥭 Rasalu <span class="qty-badge">€34 / box (Approx 3 kg)</span>
                 </span>
               </label>
-              <input type="number" id="rasalu" name="rasalu" min="0" max="50" value="0" placeholder="0" />
+              <input type="number" id="rasalu" name="rasalu" min="0" max="50" step="1" value="0" placeholder="0" />
             </div>
 
             <!-- Pickup Location -->
