@@ -214,44 +214,7 @@
     .feature-title { font-weight: 700; color: white; font-size: 0.9rem; margin-bottom: 4px; }
     .feature-desc { font-size: 0.78rem; color: rgba(255,255,255,0.78); line-height: 1.5; }
 
-    /* ─── Pricing Cards ─────────────────────────────────────────── */
-    .pricing-section {
-      max-width: 540px;
-      margin: 0 auto 48px;
-      text-align: center;
-    }
-
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 16px;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .price-card {
-      background: rgba(0,0,0,0.44);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: var(--radius-lg);
-      padding: 28px 20px;
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .price-card:hover { transform: translateY(-4px); background: rgba(0,0,0,0.60); box-shadow: 0 16px 36px rgba(0,0,0,0.45); }
-    .price-card .mango-type { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.75); margin-bottom: 4px; }
-    .price-card .mango-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: white; margin-bottom: 8px; }
-    .price-card .price { font-size: 2rem; font-weight: 800; color: var(--mango-light); line-height: 1; }
-    .price-card .price-unit { font-size: 0.75rem; color: rgba(255,255,255,0.70); margin-top: 4px; }
-    .price-card .mango-emoji { font-size: 2.2rem; margin-bottom: 8px; }
-
-    /* ─── Main Form Card ────────────────────────────────────────── */
+/* ─── Main Form Card ────────────────────────────────────────── */
     .form-section {
       max-width: 680px;
       margin: 0 auto;
@@ -467,6 +430,7 @@
       grid-column: 1 / -1;
       display: none;
       align-items: center;
+      white-space: pre-line;
       justify-content: center;
       gap: 10px;
       padding: 16px 20px;
@@ -540,7 +504,6 @@
       .status-msg { grid-column: 1; }
       .form-divider { grid-column: 1; }
       .form-section-label { grid-column: 1; }
-      .pricing-grid { grid-template-columns: 1fr; }
       .phone-row { grid-template-columns: 100px 1fr; }
     }
 
@@ -606,28 +569,7 @@
       </div>
     </div>
 
-    <!-- ── Pricing ────────────────────────────────────────────────── -->
-    <section class="pricing-section fade-up" aria-label="Pricing">
-      <p class="section-label">Pricing — 2026 Batch 01</p>
-      <div class="pricing-grid">
-        <div class="price-card">
-          <div class="mango-emoji">🥭</div>
-          <div class="mango-type">Variety</div>
-          <div class="mango-name">Alphonso</div>
-          <div class="price">€37</div>
-          <div class="price-unit">approx 3 kg / box</div>
-        </div>
-        <div class="price-card">
-          <div class="mango-emoji">🥭</div>
-          <div class="mango-type">Variety</div>
-          <div class="mango-name">Kesar</div>
-          <div class="price">€37</div>
-          <div class="price-unit">approx 3 kg / box</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── Prebooking Form ─────────────────────────────────────────── -->
+<!-- ── Prebooking Form ─────────────────────────────────────────── -->
     <section class="form-section fade-up" aria-label="Prebooking form">
       <div class="glass-card">
 
@@ -795,6 +737,16 @@
     /* ── Google Apps Script URL ─────────────────────────────────── */
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZtdeiVu2KrktXQ24ZPkosBJKuVYGHxxMh_HZDtok_6Mjw4VqRac5sMKwwKjvItClj9g/exec";
 
+    /* ── Order ID generator ─────────────────────────────────────── */
+    function generateOrderId() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let id = 'MNG-';
+      for (let i = 0; i < 8; i++) {
+        id += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return id;
+    }
+
     /* ── DOM references ─────────────────────────────────────────── */
     const form        = document.getElementById('prebook-form');
     const submitBtn   = document.getElementById('submit-btn');
@@ -857,6 +809,7 @@
       const phoneRaw    = document.getElementById('phone').value.trim();
 
       const data = {
+        orderId:   generateOrderId(),
         name:      document.getElementById('name').value.trim(),
         email:     document.getElementById('email').value.trim(),
         phone:     ` ${countryCode} ${phoneRaw}`,
@@ -896,7 +849,18 @@
         } catch (_) { /* plain text response — treat as success */ }
 
         if (success) {
-          showStatus('success', '🎉 Booking successful! We\'ll be in touch soon. See you at pickup!');
+          const total = (data.alphonso + data.kesar) * 37;
+          const lines = [
+            `🎉 Booking confirmed! A confirmation email has been sent to ${data.email}.`,
+            ``,
+            `Order ID: ${data.orderId}`,
+            `Name: ${data.name}`,
+            data.alphonso > 0 ? `Alphonso: ${data.alphonso} box${data.alphonso > 1 ? 'es' : ''}` : '',
+            data.kesar > 0    ? `Kesar: ${data.kesar} box${data.kesar > 1 ? 'es' : ''}` : '',
+            `Total: €${total}`,
+            `Pickup: ${data.pickup}`,
+          ].filter(Boolean).join('\n');
+          showStatus('success', lines);
           form.reset();
           updateTotal();
         } else {
