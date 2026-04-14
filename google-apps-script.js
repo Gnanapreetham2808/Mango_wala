@@ -55,7 +55,7 @@ function doPost(e) {
 }
 
 function sendConfirmationEmail(data, total) {
-  const subject = `Order Confirmed – ${data.orderId} | Mango Wala 🥭`;
+  const subject = `Order Confirmed – ${data.orderId} | Europemangowale 🥭`;
 
   const varieties = [
     { key: 'alphonso',     label: 'Alphonso',     price: PRICES.alphonso     },
@@ -86,7 +86,7 @@ function sendConfirmationEmail(data, total) {
   const htmlBody = `
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#fffbf0;padding:32px;border-radius:12px;">
 
-      <h1 style="margin:0 0 4px;color:#d97706;text-align:center;font-size:28px;">🥭 Mango Wala</h1>
+      <h1 style="margin:0 0 4px;color:#d97706;text-align:center;font-size:28px;">🥭 Europemangowale</h1>
       <p style="text-align:center;color:#78716c;margin:0 0 28px;">Fresh Mangoes – Straight from the Farm</p>
 
       <h2 style="color:#333;text-align:center;margin:0 0 20px;">Booking Confirmed!</h2>
@@ -125,7 +125,7 @@ function sendConfirmationEmail(data, total) {
       </div>
 
       <p style="text-align:center;color:#78716c;font-size:14px;line-height:1.6;">
-        Thank you for prebooking with Mango Wala!<br>
+        Thank you for prebooking with Europemangowale!<br>
         We'll reach out closer to your pickup date with final details.<br><br>
         See you soon! 🥭
       </p>
@@ -137,6 +137,6 @@ function sendConfirmationEmail(data, total) {
     to:       data.email,
     subject:  subject,
     htmlBody: htmlBody,
-    name:     'Mango Wala',
+    name:     'Europemangowale',
   });
 }
