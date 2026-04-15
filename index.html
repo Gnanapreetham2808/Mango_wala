@@ -497,8 +497,12 @@
     .footer {
       text-align: center;
       margin-top: 52px;
-      color: rgba(255,255,255,0.60);
+      color: rgba(255,255,255,0.76);
       font-size: 0.80rem;
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
     }
     .footer a { color: rgba(255,255,255,0.85); text-decoration: underline; }
 
@@ -553,7 +557,7 @@
 
       <p class="hero-desc">
         The wait is finally over! EuropeMangoWale is thrilled to kick off the 2026 season
-        and bring you our very first wave of mango magic. Reserve your box before stocks run out!
+        and brings you our freshest mangoes straight from the farm. Reserve your box before stocks run out!
       </p>
       <div class="info-pills">
         <span class="pill"><span class="pill-icon">📅</span> Pick Up: May 1 & 2</span>
@@ -572,7 +576,7 @@
       <div class="feature-card">
         <div class="feature-icon">📍</div>
         <div class="feature-title">Easy Pickup</div>
-        <div class="feature-desc">Convenient locations in Amsterdam, Rotterdam & Utrecht</div>
+        <div class="feature-desc">Convenient locations</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">⏳</div>
@@ -642,21 +646,14 @@
 
             <!-- Phone -->
             <div class="form-group full">
-              <label for="phone">Phone Number <span class="required">*</span></label>
+              <label for="phone">WhatsApp Number <span class="required">*</span></label>
               <div class="phone-row">
                 <select id="country-code" name="countryCode" aria-label="Country code">
-                  <option value="+31">🇳🇱 +31</option>
                   <option value="+32">🇧🇪 +32</option>
                   <option value="+49">🇩🇪 +49</option>
-                  <option value="+33">🇫🇷 +33</option>
-                  <option value="+44">🇬🇧 +44</option>
-                  <option value="+34">🇪🇸 +34</option>
-                  <option value="+39">🇮🇹 +39</option>
-                  <option value="+48">🇵🇱 +48</option>
                   <option value="+91">🇮🇳 +91</option>
+                  <option value="+31" selected>🇳🇱 +31</option>
                   <option value="+1">🇺🇸 +1</option>
-                  <option value="+61">🇦🇺 +61</option>
-                  <option value="+971">🇦🇪 +971</option>
                 </select>
                 <input type="tel" id="phone" name="phone" placeholder="6 12 34 56 78" required autocomplete="tel-national" />
               </div>
@@ -726,8 +723,10 @@
                 <option value="Amstelveen">📍 Amstelveen</option>
                 <option value="Arnhem">📍 Arnhem</option>
                 <option value="Eindhoven - Achtse Barrier">📍 Eindhoven - Achtse Barrier</option>
+                <option value="Eindhoven - Best">📍 Eindhoven - Best</option>
                 <option value="Eindhoven - Blixembosh">📍 Eindhoven - Blixembosh</option>
-                <option value="Eindhoven - Centrum">📍 Eindhoven - Centrum</option>
+                <option value="Eindhoven - Centrum (MolenArea)">📍 Eindhoven - Centrum (MolenArea)</option>
+                <option value="Eindhoven - Denbosch">📍 Eindhoven - Denbosch</option>
                 <option value="Eindhoven - Kanaaldijk South">📍 Eindhoven - Kanaaldijk South</option>
                 <option value="Eindhoven - Wonsel Centrum">📍 Eindhoven - Wonsel Centrum</option>
                 <option value="Gouda">📍 Gouda</option>
@@ -748,17 +747,18 @@
 
             <!-- Comments -->
             <div class="form-group full">
-              <label for="comments">Comments / Special Requests</label>
-              <textarea id="comments" name="comments" placeholder="Any dietary requirements, delivery notes, or questions…"></textarea>
+              <label for="comments">Comments</label>
+              <textarea id="comments" name="comments" placeholder="Comments…"></textarea>
             </div>
 
             <!-- Payment Acknowledgement -->
             <label class="checkbox-group">
               <input type="checkbox" id="payment-ack" name="paymentAck" required />
               <span class="checkbox-label">
-                <strong>Payment Acknowledgement *</strong><br />
+                <strong>Payment Acknowledgement & GDPR *</strong><br />
                 I understand that payment will be accepted <strong>by bank transfer during collection</strong>.
-                No advance payment is required to prebook.
+                No advance payment is required to prebook.<br /><br />
+                * We collect your name, email and WhatsApp number to contact you and provide our service updates only, and we process this data in accordance with the EU GDPR, ensuring it is used only for this purpose.
               </span>
             </label>
 
@@ -784,7 +784,7 @@
     <footer class="footer fade-up">
       <p>© 2026 EuropeMangoWale · Made with 🥭 for mango lovers across Europe</p>
       <p style="margin-top:6px; font-size:0.75rem; opacity:0.7;">
-        Questions? Reach out before placing your prebook.
+        Questions? Reach out in our whatsapp community.
       </p>
     </footer>
 
@@ -924,6 +924,7 @@
         try {
           const json = JSON.parse(result);
           if (json.result === 'error') success = false;
+          if (json.orderId) data.orderId = json.orderId; // use server-generated ID
         } catch (_) { /* plain text response — treat as success */ }
 
         if (success) {

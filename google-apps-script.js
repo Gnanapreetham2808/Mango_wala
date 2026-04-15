@@ -20,6 +20,12 @@ function doPost(e) {
       ]);
     }
 
+    // ── Generate unique sequential order ID server-side ────────────────────
+    const dataRows = sheet.getLastRow() - 1; // subtract header row
+    const orderNum = 1001 + dataRows;
+    const orderId  = 'MAN-BAT-01-' + orderNum;
+    data.orderId   = orderId;
+
     const total = Number(data.alphonso)     * PRICES.alphonso
                 + Number(data.kesar)        * PRICES.kesar
                 + Number(data.banginapally) * PRICES.banginapally
@@ -124,13 +130,16 @@ function sendConfirmationEmail(data, total) {
 
       <!-- Payment note -->
       <div style="background:#fef3c7;border-radius:8px;padding:14px 18px;text-align:center;margin-bottom:24px;">
-        <p style="margin:0;color:#92400e;font-weight:600;">💳 Payment: Bank transfer at collection</p>
+        <p style="margin:0;color:#92400e;font-weight:600;">💳 Payment Acknowledgement & GDPR: Bank transfer at collection</p>
       </div>
+        <p style="text-align:center;color:#57534e;font-size:12px;line-height:1.6;margin:0 0 20px;">
+          * We collect your name, email and WhatsApp number to contact you and provide our service updates only, and we process this data in accordance with the EU GDPR, ensuring it is used only for this purpose.
+        </p>
 
       <p style="text-align:center;color:#78716c;font-size:14px;line-height:1.6;">
         Thank you for prebooking with EuropeMangoWale!<br>
-        We'll reach out closer to your pickup date with final details.<br><br>
-        See you soon! 🥭
+        Now sit back &amp; relax while we get your Mango's.<br><br>
+        See you soon, for regular updates please join our WhatsApp Community! 🥭
       </p>
 
       <p style="text-align:center;background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:10px 16px;font-size:12px;color:#856404;">
