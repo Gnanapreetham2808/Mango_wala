@@ -2,7 +2,7 @@
 // Deploy as a Web App (Execute as: Me, Who has access: Anyone)
 // Paste this entire file into your Apps Script editor and redeploy.
 
-const PRICES = { alphonso: 30, kesar: 30, banginapally: 32, rasalu: 34 };
+const PRICES = { alphonso: 32, kesar: 32, banginapally: 34, rasalu: 35, himayat: 40 };
 
 function doPost(e) {
   try {
@@ -15,7 +15,7 @@ function doPost(e) {
     if (sheet.getLastRow() === 0) {
       sheet.appendRow([
         'Timestamp', 'Order ID', 'Name', 'Email', 'Phone',
-        'Alphonso Boxes', 'Kesar Boxes', 'Banginapally Boxes', 'Rasalu Boxes',
+        'Alphonso Boxes', 'Kesar Boxes', 'Banganpally Boxes', 'Rasalu Boxes', 'Himayat Boxes',
         'Pickup Location', 'Comments', 'Total (€)'
       ]);
     }
@@ -23,7 +23,8 @@ function doPost(e) {
     const total = Number(data.alphonso)     * PRICES.alphonso
                 + Number(data.kesar)        * PRICES.kesar
                 + Number(data.banginapally) * PRICES.banginapally
-                + Number(data.rasalu)       * PRICES.rasalu;
+                + Number(data.rasalu)       * PRICES.rasalu
+                + Number(data.himayat)      * PRICES.himayat;
 
     sheet.appendRow([
       data.timestamp,
@@ -35,6 +36,7 @@ function doPost(e) {
       data.kesar        || 0,
       data.banginapally || 0,
       data.rasalu       || 0,
+      data.himayat      || 0,
       data.pickup,
       data.comments || '',
       total,
@@ -55,13 +57,14 @@ function doPost(e) {
 }
 
 function sendConfirmationEmail(data, total) {
-  const subject = `Order Confirmed – ${data.orderId} | Europemangowale 🥭`;
+  const subject = `Order Confirmed – ${data.orderId} | EuropeMangoWale 🥭`;
 
   const varieties = [
     { key: 'alphonso',     label: 'Alphonso',     price: PRICES.alphonso     },
     { key: 'kesar',        label: 'Kesar',        price: PRICES.kesar        },
-    { key: 'banginapally', label: 'Banginapally', price: PRICES.banginapally },
+    { key: 'banginapally', label: 'Banganpally',  price: PRICES.banginapally },
     { key: 'rasalu',       label: 'Rasalu',       price: PRICES.rasalu       },
+    { key: 'himayat',      label: 'Himayat',      price: PRICES.himayat      },
   ];
 
   const itemRows = varieties
@@ -86,8 +89,8 @@ function sendConfirmationEmail(data, total) {
   const htmlBody = `
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#fffbf0;padding:32px;border-radius:12px;">
 
-      <h1 style="margin:0 0 4px;color:#d97706;text-align:center;font-size:28px;">🥭 Europemangowale</h1>
-      <p style="text-align:center;color:#78716c;margin:0 0 28px;">Fresh Mangoes – Straight from the Farm</p>
+      <h1 style="margin:0 0 4px;color:#d97706;text-align:center;font-size:28px;">🥭 EuropeMangoWale</h1>
+      <p style="text-align:center;color:#78716c;margin:0 0 28px;">Fresh Alphonso & Kesar – Straight from the Farm</p>
 
       <h2 style="color:#333;text-align:center;margin:0 0 20px;">Booking Confirmed!</h2>
 
@@ -125,10 +128,20 @@ function sendConfirmationEmail(data, total) {
       </div>
 
       <p style="text-align:center;color:#78716c;font-size:14px;line-height:1.6;">
-        Thank you for prebooking with Europemangowale!<br>
+        Thank you for prebooking with EuropeMangoWale!<br>
         We'll reach out closer to your pickup date with final details.<br><br>
         See you soon! 🥭
       </p>
+
+      <!-- WhatsApp Community -->
+      <div style="background:#e7f9e7;border-radius:8px;padding:16px 20px;text-align:center;margin-top:8px;">
+        <p style="margin:0 0 8px;color:#1a7a1a;font-weight:700;font-size:15px;">📲 Join our WhatsApp Community</p>
+        <p style="margin:0 0 12px;color:#4a4a4a;font-size:13px;">Stay updated on pickup schedules, new varieties & announcements.</p>
+        <a href="https://chat.whatsapp.com/KTNFTGqsVouFOWSp60FBZG"
+           style="display:inline-block;background:#25D366;color:#fff;font-weight:700;font-size:14px;padding:10px 24px;border-radius:999px;text-decoration:none;">
+          Join Now
+        </a>
+      </div>
 
     </div>
   `;
@@ -137,6 +150,6 @@ function sendConfirmationEmail(data, total) {
     to:       data.email,
     subject:  subject,
     htmlBody: htmlBody,
-    name:     'Europemangowale',
+    name:     'EuropeMangoWale',
   });
 }
