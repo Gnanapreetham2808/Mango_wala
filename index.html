@@ -724,20 +724,20 @@
                 <option value="" disabled selected>— Select your pickup city —</option>
                 <option value="Almere">📍 Almere</option>
                 <option value="Amstelveen">📍 Amstelveen</option>
-                <option value="Zaandam">📍 Zaandam</option>
-                <option value="Hoofddorp">📍 Hoofddorp</option>
-                <option value="The Hague">📍 The Hague</option>
-                <option value="Rotterdam">📍 Rotterdam</option>
-                <option value="Gouda">📍 Gouda</option>
-                <option value="Utrecht">📍 Utrecht</option>
                 <option value="Arnhem">📍 Arnhem</option>
-                <option value="Eindhoven - Centrum">📍 Eindhoven - Centrum</option>
-                <option value="Eindhoven - Blixembosh">📍 Eindhoven - Blixembosh</option>
                 <option value="Eindhoven - Achtse Barrier">📍 Eindhoven - Achtse Barrier</option>
+                <option value="Eindhoven - Blixembosh">📍 Eindhoven - Blixembosh</option>
+                <option value="Eindhoven - Centrum">📍 Eindhoven - Centrum</option>
                 <option value="Eindhoven - Kanaaldijk South">📍 Eindhoven - Kanaaldijk South</option>
                 <option value="Eindhoven - Wonsel Centrum">📍 Eindhoven - Wonsel Centrum</option>
+                <option value="Gouda">📍 Gouda</option>
+                <option value="Hoofddorp">📍 Hoofddorp</option>
                 <option value="Meerhoven">📍 Meerhoven</option>
+                <option value="Rotterdam">📍 Rotterdam</option>
+                <option value="The Hague">📍 The Hague</option>
+                <option value="Utrecht">📍 Utrecht</option>
                 <option value="Veldhoven">📍 Veldhoven</option>
+                <option value="Zaandam">📍 Zaandam</option>
               </select>
             </div>
 
@@ -757,7 +757,7 @@
               <input type="checkbox" id="payment-ack" name="paymentAck" required />
               <span class="checkbox-label">
                 <strong>Payment Acknowledgement *</strong><br />
-                I understand that payment will be accepted <strong>in cash or transfer during collection</strong>.
+                I understand that payment will be accepted <strong>by bank transfer during collection</strong>.
                 No advance payment is required to prebook.
               </span>
             </label>
@@ -799,9 +799,10 @@
 
     /* ── Order ID generator ─────────────────────────────────────── */
     function generateOrderId() {
-      const digits = Math.floor(100 + Math.random() * 900);
-      const id = `MANGO-BATCH-01-${digits}`;
-      return id;
+      const current = parseInt(localStorage.getItem('manOrderCounter') || '1000', 10);
+      const next = current >= 9999 ? 1001 : current + 1;
+      localStorage.setItem('manOrderCounter', next);
+      return `MAN-BAT-01-${next}`;
     }
 
     /* ── DOM references ─────────────────────────────────────────── */
@@ -844,7 +845,11 @@
 
     /* ── Status helper ──────────────────────────────────────────── */
     function showStatus(type, message) {
-      statusMsg.textContent   = message;
+      if (type === 'success') {
+        statusMsg.innerHTML = message;
+      } else {
+        statusMsg.textContent = message;
+      }
       statusMsg.className     = `status-msg ${type} visible`;
       statusMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
@@ -927,9 +932,7 @@
                       + data.banginapally * PRICES.banginapally
                       + data.rasalu       * PRICES.rasalu
                       + data.himayat      * PRICES.himayat;
-          const lines = [
-            `🎉 Booking confirmed! A confirmation email has been sent to ${data.email}.`,
-            ``,
+          const orderLines = [
             `Order ID: ${data.orderId}`,
             `Name: ${data.name}`,
             data.alphonso     > 0 ? `Alphonso: ${data.alphonso} box${data.alphonso > 1 ? 'es' : ''}` : '',
@@ -940,7 +943,22 @@
             `Total: €${total}`,
             `Pickup: ${data.pickup}`,
           ].filter(Boolean).join('\n');
-          showStatus('success', lines);
+
+          const successHTML = `<div style="text-align:left;width:100%;">
+            <p style="margin:0 0 10px;font-size:1rem;">🎉 <strong>Booking confirmed!</strong> A confirmation email has been sent to <strong>${data.email}</strong>.</p>
+            <pre style="margin:0 0 14px;font-size:0.85rem;white-space:pre-wrap;line-height:1.7;">${orderLines}</pre>
+            <div style="background:linear-gradient(135deg,#1a4d2e 0%,#25613a 100%);border:1px solid rgba(37,211,102,0.35);border-radius:14px;padding:20px 20px 18px;text-align:center;margin-top:4px;">
+              <div style="font-size:2rem;margin-bottom:6px;">💬</div>
+              <p style="margin:0 0 4px;font-weight:800;font-size:1rem;color:#ffffff;letter-spacing:0.02em;">Join our WhatsApp Community</p>
+              <p style="margin:0 0 14px;font-size:0.78rem;color:rgba(255,255,255,0.70);">Fresh Mangoes delivered straight from the farm 🥭</p>
+              <a href="https://chat.whatsapp.com/KTNFTGqsVouFOWSp60FBZG" target="_blank"
+                style="display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;font-weight:700;font-size:0.88rem;padding:10px 26px;border-radius:999px;text-decoration:none;box-shadow:0 4px 14px rgba(37,211,102,0.45);">
+                <svg width="16" height="16" viewBox="0 0 32 32" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16 2C8.28 2 2 8.28 2 16c0 2.46.66 4.76 1.8 6.76L2 30l7.44-1.76A13.9 13.9 0 0016 30c7.72 0 14-6.28 14-14S23.72 2 16 2zm0 25.4a11.35 11.35 0 01-5.8-1.6l-.42-.24-4.42 1.04 1.08-4.3-.28-.44A11.38 11.38 0 014.6 16C4.6 9.7 9.7 4.6 16 4.6S27.4 9.7 27.4 16 22.3 27.4 16 27.4zm6.2-8.5c-.34-.17-2-.98-2.3-1.1-.32-.1-.54-.17-.78.17-.22.34-.88 1.1-1.08 1.32-.2.22-.4.24-.74.08-.34-.17-1.44-.53-2.74-1.68a10.3 10.3 0 01-1.9-2.34c-.2-.34-.02-.52.15-.69.15-.15.34-.4.5-.6.18-.2.22-.34.34-.56.1-.22.05-.42-.02-.58-.08-.17-.78-1.88-1.06-2.56-.28-.68-.56-.58-.78-.6h-.66c-.22 0-.58.08-.88.42-.3.34-1.16 1.14-1.16 2.78s1.18 3.22 1.34 3.44c.18.22 2.34 3.56 5.66 4.98.8.34 1.42.54 1.9.7.8.26 1.52.22 2.1.13.64-.1 2-.82 2.28-1.6.28-.8.28-1.48.2-1.62-.08-.14-.3-.22-.64-.38z"/></svg>
+                Join Now
+              </a>
+            </div>
+          </div>`;
+          showStatus('success', successHTML);
           form.reset();
           updateTotal();
         } else {

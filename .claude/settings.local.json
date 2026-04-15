@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:unsplash.com)",
+      "WebFetch(domain:www.pexels.com)",
+      "WebFetch(domain:pixabay.com)",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "Bash(python3 -c ':*)",
+      "Bash(curl -sI \"https://upload.wikimedia.org/wikipedia/commons/c/c7/Mango_orchard_in_lateritic_plateau.jpg\")",
+      "Bash(curl -o /dev/null -s -w \"%{http_code}\" \"https://upload.wikimedia.org/wikipedia/commons/c/c7/Mango_orchard_in_lateritic_plateau.jpg\")",
+      "Bash(curl -L -o mango-orchard-bg.jpg \"https://upload.wikimedia.org/wikipedia/commons/c/c7/Mango_orchard_in_lateritic_plateau.jpg\")",
+      "Bash(curl -L --insecure -o mango-orchard-bg.jpg \"https://upload.wikimedia.org/wikipedia/commons/c/c7/Mango_orchard_in_lateritic_plateau.jpg\")",
+      "Bash(grep -v \"^.*//.*url\\\\|data:\")"
+    ]
+  }
+}

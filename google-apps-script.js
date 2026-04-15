@@ -124,7 +124,7 @@ function sendConfirmationEmail(data, total) {
 
       <!-- Payment note -->
       <div style="background:#fef3c7;border-radius:8px;padding:14px 18px;text-align:center;margin-bottom:24px;">
-        <p style="margin:0;color:#92400e;font-weight:600;">💳 Payment: Cash or bank transfer at collection</p>
+        <p style="margin:0;color:#92400e;font-weight:600;">💳 Payment: Bank transfer at collection</p>
       </div>
 
       <p style="text-align:center;color:#78716c;font-size:14px;line-height:1.6;">
@@ -133,10 +133,14 @@ function sendConfirmationEmail(data, total) {
         See you soon! 🥭
       </p>
 
+      <p style="text-align:center;background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:10px 16px;font-size:12px;color:#856404;">
+        📬 <strong>Can't find this email?</strong> Please check your <strong>Junk / Spam</strong> folder and mark it as "Not Spam".
+      </p>
+
       <!-- WhatsApp Community -->
       <div style="background:#e7f9e7;border-radius:8px;padding:16px 20px;text-align:center;margin-top:8px;">
         <p style="margin:0 0 8px;color:#1a7a1a;font-weight:700;font-size:15px;">📲 Join our WhatsApp Community</p>
-        <p style="margin:0 0 12px;color:#4a4a4a;font-size:13px;">Stay updated on pickup schedules, new varieties & announcements.</p>
+        <p style="margin:0 0 12px;color:#4a4a4a;font-size:13px;">Fresh Mangoes delivered straight from the farm 🥭</p>
         <a href="https://chat.whatsapp.com/KTNFTGqsVouFOWSp60FBZG"
            style="display:inline-block;background:#25D366;color:#fff;font-weight:700;font-size:14px;padding:10px 24px;border-radius:999px;text-decoration:none;">
           Join Now
