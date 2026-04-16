@@ -957,7 +957,8 @@
           ].filter(Boolean).join('\n');
 
           const successHTML = `<div style="text-align:left;width:100%;">
-            <p style="margin:0 0 10px;font-size:1rem;">🎉 <strong>Booking confirmed!</strong> A confirmation email has been sent to <strong>${data.email}</strong> <span style="font-size:0.85rem;opacity:0.85;">(Please check spam/junk)</span></p>
+            <p style="margin:0 0 6px;font-size:1rem;">🎉 <strong>Booking confirmed!</strong> Your order has been received. We'll be in touch soon!</p>
+            <p style="margin:0 0 10px;font-size:0.9rem;color:#92400e;background:#fef3c7;border-radius:8px;padding:8px 12px;">📸 <strong>Please save a screenshot</strong> of this confirmation for your records.</p>
             <pre style="margin:0 0 14px;font-size:0.85rem;white-space:pre-wrap;line-height:1.7;">${orderLines}</pre>
             <div style="background:linear-gradient(135deg,#075e54 0%,#128c7e 100%);border-radius:16px;padding:22px 24px;text-align:center;margin-top:6px;box-shadow:0 6px 24px rgba(7,94,84,0.50);">
               <div style="display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;background:#25D366;border-radius:50%;margin-bottom:12px;box-shadow:0 4px 12px rgba(37,211,102,0.50);">
