@@ -23,7 +23,7 @@ function doPost(e) {
     // ── Generate unique sequential order ID server-side ────────────────────
     const dataRows = sheet.getLastRow() - 1; // subtract header row
     const orderNum = 1001 + dataRows;
-    const orderId  = 'MAN-BAT-01-' + orderNum;
+    const orderId  = 'MANBAT-01-' + orderNum;
     data.orderId   = orderId;
 
     const total = Number(data.alphonso)     * PRICES.alphonso
@@ -129,12 +129,12 @@ function sendConfirmationEmail(data, total) {
       </table>
 
       <!-- Payment note -->
-      <div style="background:#fef3c7;border-radius:8px;padding:14px 18px;text-align:center;margin-bottom:24px;">
-        <p style="margin:0;color:#92400e;font-weight:600;">💳 Payment Acknowledgement & GDPR: Bank transfer at collection</p>
+      <div style="background:#fef3c7;border-radius:8px;padding:14px 18px;text-align:center;margin-bottom:12px;">
+        <p style="margin:0;color:#92400e;font-weight:600;">💳 Payment Acknowledgement: Bank transfer at collection</p>
       </div>
-        <p style="text-align:center;color:#57534e;font-size:12px;line-height:1.6;margin:0 0 20px;">
-          * We collect your name, email and WhatsApp number to contact you and provide our service updates only, and we process this data in accordance with the EU GDPR, ensuring it is used only for this purpose.
-        </p>
+      <p style="text-align:center;color:#57534e;font-size:12px;line-height:1.6;margin:0 0 20px;">
+        🔒 <em>We collect your name, email and WhatsApp number solely to contact you and provide service updates, in accordance with EU GDPR.</em>
+      </p>
 
       <p style="text-align:center;color:#78716c;font-size:14px;line-height:1.6;">
         Thank you for prebooking with EuropeMangoWale!<br>

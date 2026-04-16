@@ -722,11 +722,12 @@
                 <option value="Almere">📍 Almere</option>
                 <option value="Amstelveen">📍 Amstelveen</option>
                 <option value="Arnhem">📍 Arnhem</option>
+                <option value="Denbosch">📍Denbosch</option>
                 <option value="Eindhoven - Achtse Barrier">📍 Eindhoven - Achtse Barrier</option>
                 <option value="Eindhoven - Best">📍 Eindhoven - Best</option>
                 <option value="Eindhoven - Blixembosh">📍 Eindhoven - Blixembosh</option>
                 <option value="Eindhoven - Centrum (MolenArea)">📍 Eindhoven - Centrum (MolenArea)</option>
-                <option value="Eindhoven - Denbosch">📍 Eindhoven - Denbosch</option>
+                
                 <option value="Eindhoven - Kanaaldijk South">📍 Eindhoven - Kanaaldijk South</option>
                 <option value="Eindhoven - Wonsel Centrum">📍 Eindhoven - Wonsel Centrum</option>
                 <option value="Gouda">📍 Gouda</option>
@@ -737,7 +738,11 @@
                 <option value="Utrecht">📍 Utrecht</option>
                 <option value="Veldhoven">📍 Veldhoven</option>
                 <option value="Zaandam">📍 Zaandam</option>
+                <option value="Other">📍 Other (see comments)</option>
               </select>
+              <p id="other-location-note" style="display:none; margin-top:6px; color:#c0392b; font-size:0.85rem;">
+                ⚠️ Please add your location in the Comments box below. Note: we <strong>cannot guarantee</strong> pickup at unlisted locations.
+              </p>
             </div>
 
             <hr class="form-divider" />
@@ -802,8 +807,14 @@
       const current = parseInt(localStorage.getItem('manOrderCounter') || '1000', 10);
       const next = current >= 9999 ? 1001 : current + 1;
       localStorage.setItem('manOrderCounter', next);
-      return `MAN-BAT-01-${next}`;
+      return `MANBAT-01-${next}`;
     }
+
+    /* ── Other location warning ────────────────────────────────── */
+    document.getElementById('pickup').addEventListener('change', function () {
+      document.getElementById('other-location-note').style.display =
+        this.value === 'Other' ? 'block' : 'none';
+    });
 
     /* ── DOM references ─────────────────────────────────────────── */
     const form        = document.getElementById('prebook-form');
