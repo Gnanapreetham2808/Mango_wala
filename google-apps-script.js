@@ -96,7 +96,7 @@ function sendConfirmationEmail(data, total) {
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#fffbf0;padding:32px;border-radius:12px;">
 
       <h1 style="margin:0 0 4px;color:#d97706;text-align:center;font-size:28px;">🥭 EuropeMangoWale</h1>
-      <p style="text-align:center;color:#78716c;margin:0 0 28px;">Fresh Alphonso & Kesar – Straight from the Farm</p>
+      <p style="text-align:center;color:#78716c;margin:0 0 28px;">Fresh Mangoes - Straight from the farm</p>
 
       <h2 style="color:#333;text-align:center;margin:0 0 20px;">Booking Confirmed!</h2>
 
