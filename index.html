@@ -714,6 +714,16 @@
               <input type="number" id="himayat" name="himayat" min="0" max="50" step="1" placeholder="Enter Quantity" />
             </div>
 
+            <!-- Totapuri -->
+            <div class="form-group qty-group">
+              <label for="totapuri">
+                <span class="qty-label-inner">
+                  🥭 Totapuri <span class="qty-badge">€35 / box (Approx 4 kg)</span>
+                </span>
+              </label>
+              <input type="number" id="totapuri" name="totapuri" min="0" max="50" step="1" placeholder="Enter Quantity" />
+            </div>
+
             <!-- Pickup Location -->
             <div class="form-group full">
               <label for="pickup">Pickup Location <span class="required">*</span></label>
@@ -825,10 +835,11 @@
     const banginapallyIn = document.getElementById('banginapally');
     const rasaluIn      = document.getElementById('rasalu');
     const himayatIn     = document.getElementById('himayat');
+    const totapuriIn    = document.getElementById('totapuri');
     const totalDisp     = document.getElementById('total-display');
     const totalAmt      = document.getElementById('total-amount');
 
-    const PRICES = { alphonso: 32, kesar: 32, banginapally: 34, rasalu: 35, himayat: 40 };
+    const PRICES = { alphonso: 32, kesar: 32, banginapally: 34, rasalu: 35, himayat: 40, totapuri: 35 };
 
     /* ── Live order total ───────────────────────────────────────── */
     function updateTotal() {
@@ -837,9 +848,10 @@
       const b = parseInt(banginapallyIn.value, 10) || 0;
       const r = parseInt(rasaluIn.value,       10) || 0;
       const h = parseInt(himayatIn.value,      10) || 0;
+      const t = parseInt(totapuriIn.value,    10) || 0;
       const total = a * PRICES.alphonso + k * PRICES.kesar
                   + b * PRICES.banginapally + r * PRICES.rasalu
-                  + h * PRICES.himayat;
+                  + h * PRICES.himayat + t * PRICES.totapuri;
       if (total > 0) {
         totalAmt.textContent = `€${total}`;
         totalDisp.style.display = 'block';
@@ -853,6 +865,7 @@
     banginapallyIn.addEventListener('input', updateTotal);
     rasaluIn.addEventListener('input', updateTotal);
     himayatIn.addEventListener('input', updateTotal);
+    totapuriIn.addEventListener('input', updateTotal);
 
     /* ── Status helper ──────────────────────────────────────────── */
     function showStatus(type, message) {
@@ -877,9 +890,9 @@
                                        return 'Please enter a valid email address.';
       if (!data.phone.trim())         return 'Please enter your phone number.';
       if (!data.pickup)               return 'Please select a pickup location.';
-      if (data.alphonso < 0 || data.kesar < 0 || data.banginapally < 0 || data.rasalu < 0 || data.himayat < 0)
+      if (data.alphonso < 0 || data.kesar < 0 || data.banginapally < 0 || data.rasalu < 0 || data.himayat < 0 || data.totapuri < 0)
                                        return 'Box quantities cannot be negative.';
-      if (data.alphonso === 0 && data.kesar === 0 && data.banginapally === 0 && data.rasalu === 0 && data.himayat === 0)
+      if (data.alphonso === 0 && data.kesar === 0 && data.banginapally === 0 && data.rasalu === 0 && data.himayat === 0 && data.totapuri === 0)
                                        return 'Please order at least 1 box of mangoes.';
       const ack = document.getElementById('payment-ack');
       if (!ack.checked)               return 'Please acknowledge the payment terms.';
@@ -904,6 +917,7 @@
         banginapally: parseInt(banginapallyIn.value, 10) || 0,
         rasalu:       parseInt(rasaluIn.value,       10) || 0,
         himayat:      parseInt(himayatIn.value,      10) || 0,
+        totapuri:     parseInt(totapuriIn.value,    10) || 0,
         pickup:       document.getElementById('pickup').value,
         comments:     document.getElementById('comments').value.trim(),
         timestamp:    new Date().toISOString(),
@@ -943,7 +957,8 @@
                       + data.kesar        * PRICES.kesar
                       + data.banginapally * PRICES.banginapally
                       + data.rasalu       * PRICES.rasalu
-                      + data.himayat      * PRICES.himayat;
+                      + data.himayat      * PRICES.himayat
+                      + data.totapuri     * PRICES.totapuri;
           const orderLines = [
             `Order ID: ${data.orderId}`,
             `Name: ${data.name}`,
@@ -952,6 +967,7 @@
             data.banginapally > 0 ? `Banganpally: ${data.banginapally} box${data.banginapally > 1 ? 'es' : ''}` : '',
             data.rasalu       > 0 ? `Rasalu: ${data.rasalu} box${data.rasalu > 1 ? 'es' : ''}` : '',
             data.himayat      > 0 ? `Himayat: ${data.himayat} box${data.himayat > 1 ? 'es' : ''}` : '',
+            data.totapuri     > 0 ? `Totapuri: ${data.totapuri} box${data.totapuri > 1 ? 'es' : ''}` : '',
             `Total: €${total}`,
             `Pickup: ${data.pickup}`,
           ].filter(Boolean).join('\n');

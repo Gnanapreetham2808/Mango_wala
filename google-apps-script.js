@@ -2,7 +2,7 @@
 // Deploy as a Web App (Execute as: Me, Who has access: Anyone)
 // Paste this entire file into your Apps Script editor and redeploy.
 
-const PRICES = { alphonso: 32, kesar: 32, banginapally: 34, rasalu: 35, himayat: 40 };
+const PRICES = { alphonso: 32, kesar: 32, banginapally: 34, rasalu: 35, himayat: 40, totapuri: 35 };
 
 function doPost(e) {
   try {
@@ -15,7 +15,7 @@ function doPost(e) {
     if (sheet.getLastRow() === 0) {
       sheet.appendRow([
         'Timestamp', 'Order ID', 'Name', 'Email', 'Phone',
-        'Alphonso Boxes', 'Kesar Boxes', 'Banganpally Boxes', 'Rasalu Boxes', 'Himayat Boxes',
+        'Alphonso Boxes', 'Kesar Boxes', 'Banganpally Boxes', 'Rasalu Boxes', 'Himayat Boxes', 'Totapuri Boxes',
         'Pickup Location', 'Comments', 'Total (€)'
       ]);
     }
@@ -30,7 +30,8 @@ function doPost(e) {
                 + Number(data.kesar)        * PRICES.kesar
                 + Number(data.banginapally) * PRICES.banginapally
                 + Number(data.rasalu)       * PRICES.rasalu
-                + Number(data.himayat)      * PRICES.himayat;
+                + Number(data.himayat)      * PRICES.himayat
+                + Number(data.totapuri)     * PRICES.totapuri;
 
     sheet.appendRow([
       data.timestamp,
@@ -43,6 +44,7 @@ function doPost(e) {
       data.banginapally || 0,
       data.rasalu       || 0,
       data.himayat      || 0,
+      data.totapuri     || 0,
       data.pickup,
       data.comments || '',
       total,
