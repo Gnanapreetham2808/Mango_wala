@@ -99,20 +99,19 @@ function buildEmailHtml(data, orderId, total) {
     <p style="margin:0;font-size:14px;color:#333;">See you soon, for more details on Mangoes delivery date/time, location wise point of contacts and regular updates — please join our WhatsApp community in location specific group.</p>
   </td></tr>
   <tr><td style="padding:0 32px 20px;text-align:center;">
-    <p style="margin:0 0 10px;font-size:14px;color:#333;">Thank you for prebooking with EuropeMangoWale!</p>
-    <p style="margin:0;font-size:11px;color:#888;font-style:italic;">🔒 GDPR: We collect your name, email and WhatsApp number solely to contact you and provide service updates, in accordance with EU GDPR.</p>
+    <p style="margin:0;font-size:14px;color:#333;">Thank you for prebooking with EuropeMangoWale!</p>
   </td></tr>
-  <tr><td style="padding:0 32px 20px;">
-    <div style="background:#fef3c7;border-radius:8px;padding:12px 18px;text-align:center;">
-      <p style="margin:0;font-size:13px;color:#92400e;">📧 <strong>Can't find this email?</strong> Please check your <strong>Junk / Spam</strong> folder and mark it as "Not Spam".</p>
-    </div>
-  </td></tr>
+
   <tr><td style="padding:0 32px 28px;">
     <div style="background:linear-gradient(135deg,#075e54 0%,#128c7e 100%);border-radius:12px;padding:20px 24px;text-align:center;">
       <p style="margin:0 0 4px;font-weight:800;font-size:15px;color:#fff;">📱 Join our WhatsApp Community</p>
       <p style="margin:0 0 14px;font-size:12px;color:rgba(255,255,255,0.85);">Fresh Mangoes delivered straight from the farm 🥭</p>
       <a href="https://chat.whatsapp.com/KTNFTGqsVouFOWSp60FBZG" style="display:inline-block;background:#25D366;color:#fff;font-weight:700;font-size:14px;padding:10px 28px;border-radius:999px;text-decoration:none;">Join Now</a>
     </div>
+  </td></tr>
+  <tr><td style="padding:16px 32px 24px;text-align:center;">
+    <p style="margin:0 0 10px;font-size:11px;color:#888;font-style:italic;">🔒 GDPR: We collect your name, email and WhatsApp number solely to contact you and provide service updates, in accordance with EU GDPR.</p>
+    <p style="margin:0;font-size:14px;color:#333;">Thank you for prebooking with EuropeMangoWale!<br>Now sit back and relax while we get your mangoes 🥭</p>
   </td></tr>
 </table>
 </td></tr>
