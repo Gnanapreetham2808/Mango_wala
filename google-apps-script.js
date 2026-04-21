@@ -50,6 +50,12 @@ function doPost(e) {
       total,
     ]);
 
+    MailApp.sendEmail({
+      to: data.email,
+      subject: `🥭 Booking Confirmed – ${orderId} | EuropeMangoWale`,
+      htmlBody: buildEmailHtml(data, orderId, total),
+    });
+
     return ContentService
       .createTextOutput(JSON.stringify({ result: 'success', orderId: data.orderId }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -59,5 +65,58 @@ function doPost(e) {
       .createTextOutput(JSON.stringify({ result: 'error', message: err.message }))
       .setMimeType(ContentService.MimeType.JSON);
   }
+}
+
+function buildEmailHtml(data, orderId, total) {
+  const lines = [
+    ['Alphonso', data.alphonso], ['Kesar', data.kesar], ['Banganpally', data.banginapally],
+    ['Rasalu', data.rasalu], ['Himayat', data.himayat], ['Totapuri', data.totapuri],
+  ].filter(([, qty]) => Number(qty) > 0)
+   .map(([name, qty]) => `<tr><td style="font-size:14px;padding:2px 0;">${name}: ${qty} box${qty > 1 ? 'es' : ''}</td></tr>`)
+   .join('');
+
+  return `<!DOCTYPE html><html><body style="margin:0;padding:0;background:#f5f5f5;font-family:Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f5;padding:20px 0;">
+<tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:12px;overflow:hidden;max-width:600px;">
+  <tr><td style="background:#2d6a2d;padding:28px 32px;text-align:center;">
+    <h1 style="margin:0;color:#fff;font-size:22px;">🥭 EuropeMangoWale</h1>
+    <p style="margin:8px 0 0;color:rgba(255,255,255,0.85);font-size:14px;">Booking Confirmation</p>
+  </td></tr>
+  <tr><td style="padding:28px 32px;">
+    <p style="margin:0 0 6px;font-size:15px;color:#333;"><strong>Order ID:</strong> ${orderId}</p>
+    <p style="margin:0 0 6px;font-size:15px;color:#333;"><strong>Name:</strong> ${data.name}</p>
+    <table cellpadding="0" cellspacing="0">${lines}</table>
+    <p style="margin:6px 0;font-size:15px;color:#333;"><strong>Total:</strong> €${total}</p>
+    <p style="margin:0;font-size:15px;color:#333;"><strong>Pickup:</strong> ${data.pickup}</p>
+  </td></tr>
+  <tr><td style="padding:0 32px 20px;">
+    <div style="background:#fef3c7;border-radius:8px;padding:14px 18px;text-align:center;">
+      <p style="margin:0;font-size:14px;font-weight:700;color:#92400e;">💳 Payment Acknowledgement: Bank transfer at collection</p>
+    </div>
+  </td></tr>
+  <tr><td style="padding:0 32px 20px;text-align:center;">
+    <p style="margin:0;font-size:14px;color:#333;">See you soon, for more details on Mangoes delivery date/time, location wise point of contacts and regular updates — please join our WhatsApp community in location specific group.</p>
+  </td></tr>
+  <tr><td style="padding:0 32px 20px;text-align:center;">
+    <p style="margin:0 0 10px;font-size:14px;color:#333;">Thank you for prebooking with EuropeMangoWale!</p>
+    <p style="margin:0;font-size:11px;color:#888;font-style:italic;">🔒 GDPR: We collect your name, email and WhatsApp number solely to contact you and provide service updates, in accordance with EU GDPR.</p>
+  </td></tr>
+  <tr><td style="padding:0 32px 20px;">
+    <div style="background:#fef3c7;border-radius:8px;padding:12px 18px;text-align:center;">
+      <p style="margin:0;font-size:13px;color:#92400e;">📧 <strong>Can't find this email?</strong> Please check your <strong>Junk / Spam</strong> folder and mark it as "Not Spam".</p>
+    </div>
+  </td></tr>
+  <tr><td style="padding:0 32px 28px;">
+    <div style="background:linear-gradient(135deg,#075e54 0%,#128c7e 100%);border-radius:12px;padding:20px 24px;text-align:center;">
+      <p style="margin:0 0 4px;font-weight:800;font-size:15px;color:#fff;">📱 Join our WhatsApp Community</p>
+      <p style="margin:0 0 14px;font-size:12px;color:rgba(255,255,255,0.85);">Fresh Mangoes delivered straight from the farm 🥭</p>
+      <a href="https://chat.whatsapp.com/KTNFTGqsVouFOWSp60FBZG" style="display:inline-block;background:#25D366;color:#fff;font-weight:700;font-size:14px;padding:10px 28px;border-radius:999px;text-decoration:none;">Join Now</a>
+    </div>
+  </td></tr>
+</table>
+</td></tr>
+</table>
+</body></html>`;
 }
 
