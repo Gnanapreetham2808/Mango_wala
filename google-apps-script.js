@@ -98,10 +98,6 @@ function buildEmailHtml(data, orderId, total) {
   <tr><td style="padding:0 32px 20px;text-align:center;">
     <p style="margin:0;font-size:14px;color:#333;">See you soon, for more details on Mangoes delivery date/time, location wise point of contacts and regular updates — please join our WhatsApp community in location specific group.</p>
   </td></tr>
-  <tr><td style="padding:0 32px 20px;text-align:center;">
-    <p style="margin:0;font-size:14px;color:#333;">Thank you for prebooking with EuropeMangoWale!</p>
-  </td></tr>
-
   <tr><td style="padding:0 32px 28px;">
     <div style="background:linear-gradient(135deg,#075e54 0%,#128c7e 100%);border-radius:12px;padding:20px 24px;text-align:center;">
       <p style="margin:0 0 4px;font-weight:800;font-size:15px;color:#fff;">📱 Join our WhatsApp Community</p>
