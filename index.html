@@ -724,6 +724,36 @@
               <input type="number" id="totapuri" name="totapuri" min="0" max="50" step="1" placeholder="Enter Quantity" />
             </div>
 
+            <!-- Payari -->
+            <div class="form-group qty-group">
+              <label for="payari">
+                <span class="qty-label-inner">
+                  🥭 Payari <span class="qty-badge">€33 / box (Approx 3 kg)</span>
+                </span>
+              </label>
+              <input type="number" id="payari" name="payari" min="0" max="50" step="1" placeholder="Enter Quantity" />
+            </div>
+
+            <!-- Langra -->
+            <div class="form-group qty-group">
+              <label for="langra">
+                <span class="qty-label-inner">
+                  🥭 Langra <span class="qty-badge">€33 / box (Approx 3 kg)</span>
+                </span>
+              </label>
+              <input type="number" id="langra" name="langra" min="0" max="50" step="1" placeholder="Enter Quantity" />
+            </div>
+
+            <!-- Dasheri -->
+            <div class="form-group qty-group">
+              <label for="dasheri">
+                <span class="qty-label-inner">
+                  🥭 Dasheri <span class="qty-badge">€33 / box (Approx 3 kg)</span>
+                </span>
+              </label>
+              <input type="number" id="dasheri" name="dasheri" min="0" max="50" step="1" placeholder="Enter Quantity" />
+            </div>
+
             <!-- Pickup Location -->
             <div class="form-group full">
               <label for="pickup">Pickup Location <span class="required">*</span></label>
@@ -836,10 +866,13 @@
     const rasaluIn      = document.getElementById('rasalu');
     const himayatIn     = document.getElementById('himayat');
     const totapuriIn    = document.getElementById('totapuri');
+    const payariIn      = document.getElementById('payari');
+    const langraIn      = document.getElementById('langra');
+    const dasheriIn     = document.getElementById('dasheri');
     const totalDisp     = document.getElementById('total-display');
     const totalAmt      = document.getElementById('total-amount');
 
-    const PRICES = { alphonso: 32, kesar: 32, banginapally: 34, rasalu: 35, himayat: 40, totapuri: 35 };
+    const PRICES = { alphonso: 32, kesar: 32, banginapally: 34, rasalu: 35, himayat: 40, totapuri: 35, payari: 33, langra: 33, dasheri: 33 };
 
     /* ── Live order total ───────────────────────────────────────── */
     function updateTotal() {
@@ -848,10 +881,14 @@
       const b = parseInt(banginapallyIn.value, 10) || 0;
       const r = parseInt(rasaluIn.value,       10) || 0;
       const h = parseInt(himayatIn.value,      10) || 0;
-      const t = parseInt(totapuriIn.value,    10) || 0;
+      const t  = parseInt(totapuriIn.value,  10) || 0;
+      const py = parseInt(payariIn.value,    10) || 0;
+      const ln = parseInt(langraIn.value,    10) || 0;
+      const ds = parseInt(dasheriIn.value,   10) || 0;
       const total = a * PRICES.alphonso + k * PRICES.kesar
                   + b * PRICES.banginapally + r * PRICES.rasalu
-                  + h * PRICES.himayat + t * PRICES.totapuri;
+                  + h * PRICES.himayat + t * PRICES.totapuri
+                  + py * PRICES.payari + ln * PRICES.langra + ds * PRICES.dasheri;
       if (total > 0) {
         totalAmt.textContent = `€${total}`;
         totalDisp.style.display = 'block';
@@ -866,6 +903,9 @@
     rasaluIn.addEventListener('input', updateTotal);
     himayatIn.addEventListener('input', updateTotal);
     totapuriIn.addEventListener('input', updateTotal);
+    payariIn.addEventListener('input', updateTotal);
+    langraIn.addEventListener('input', updateTotal);
+    dasheriIn.addEventListener('input', updateTotal);
 
     /* ── Status helper ──────────────────────────────────────────── */
     function showStatus(type, message) {
@@ -890,9 +930,9 @@
                                        return 'Please enter a valid email address.';
       if (!data.phone.trim())         return 'Please enter your phone number.';
       if (!data.pickup)               return 'Please select a pickup location.';
-      if (data.alphonso < 0 || data.kesar < 0 || data.banginapally < 0 || data.rasalu < 0 || data.himayat < 0 || data.totapuri < 0)
+      if (data.alphonso < 0 || data.kesar < 0 || data.banginapally < 0 || data.rasalu < 0 || data.himayat < 0 || data.totapuri < 0 || data.payari < 0 || data.langra < 0 || data.dasheri < 0)
                                        return 'Box quantities cannot be negative.';
-      if (data.alphonso === 0 && data.kesar === 0 && data.banginapally === 0 && data.rasalu === 0 && data.himayat === 0 && data.totapuri === 0)
+      if (data.alphonso === 0 && data.kesar === 0 && data.banginapally === 0 && data.rasalu === 0 && data.himayat === 0 && data.totapuri === 0 && data.payari === 0 && data.langra === 0 && data.dasheri === 0)
                                        return 'Please order at least 1 box of mangoes.';
       const ack = document.getElementById('payment-ack');
       if (!ack.checked)               return 'Please acknowledge the payment terms.';
@@ -918,6 +958,9 @@
         rasalu:       parseInt(rasaluIn.value,       10) || 0,
         himayat:      parseInt(himayatIn.value,      10) || 0,
         totapuri:     parseInt(totapuriIn.value,    10) || 0,
+        payari:       parseInt(payariIn.value,      10) || 0,
+        langra:       parseInt(langraIn.value,      10) || 0,
+        dasheri:      parseInt(dasheriIn.value,     10) || 0,
         pickup:       document.getElementById('pickup').value,
         comments:     document.getElementById('comments').value.trim(),
         timestamp:    new Date().toISOString(),
@@ -958,7 +1001,10 @@
                       + data.banginapally * PRICES.banginapally
                       + data.rasalu       * PRICES.rasalu
                       + data.himayat      * PRICES.himayat
-                      + data.totapuri     * PRICES.totapuri;
+                      + data.totapuri     * PRICES.totapuri
+                      + data.payari       * PRICES.payari
+                      + data.langra       * PRICES.langra
+                      + data.dasheri      * PRICES.dasheri;
           const orderLines = [
             `Order ID: ${data.orderId}`,
             `Name: ${data.name}`,
@@ -968,6 +1014,9 @@
             data.rasalu       > 0 ? `Rasalu: ${data.rasalu} box${data.rasalu > 1 ? 'es' : ''}` : '',
             data.himayat      > 0 ? `Himayat: ${data.himayat} box${data.himayat > 1 ? 'es' : ''}` : '',
             data.totapuri     > 0 ? `Totapuri: ${data.totapuri} box${data.totapuri > 1 ? 'es' : ''}` : '',
+            data.payari       > 0 ? `Payari: ${data.payari} box${data.payari > 1 ? 'es' : ''}` : '',
+            data.langra       > 0 ? `Langra: ${data.langra} box${data.langra > 1 ? 'es' : ''}` : '',
+            data.dasheri      > 0 ? `Dasheri: ${data.dasheri} box${data.dasheri > 1 ? 'es' : ''}` : '',
             `Total: €${total}`,
             `Pickup: ${data.pickup}`,
           ].filter(Boolean).join('\n');
@@ -1022,7 +1071,7 @@
     });
   </script>
 
-  <!-- Announcement Modal -->
+  <!-- Announcement Modal (commented out)
   <div id="announcement-overlay" style="
     position: fixed; inset: 0; z-index: 9999;
     background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
@@ -1086,5 +1135,6 @@
       </p>
     </div>
   </div>
+  -->
 </body>
 </html>

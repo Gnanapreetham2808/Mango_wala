@@ -2,7 +2,7 @@
 // Deploy as a Web App (Execute as: Me, Who has access: Anyone)
 // Paste this entire file into your Apps Script editor and redeploy.
 
-const PRICES = { alphonso: 32, kesar: 32, banginapally: 34, rasalu: 35, himayat: 40, totapuri: 35 };
+const PRICES = { alphonso: 32, kesar: 32, banginapally: 34, rasalu: 35, himayat: 40, totapuri: 35, payari: 33, langra: 33, dasheri: 33 };
 
 function doPost(e) {
   try {
@@ -16,6 +16,7 @@ function doPost(e) {
       sheet.appendRow([
         'Timestamp', 'Order ID', 'Name', 'Email', 'Phone',
         'Alphonso Boxes', 'Kesar Boxes', 'Banganpally Boxes', 'Rasalu Boxes', 'Himayat Boxes', 'Totapuri Boxes',
+        'Payari Boxes', 'Langra Boxes', 'Dasheri Boxes',
         'Pickup Location', 'Comments', 'Total (€)'
       ]);
     }
@@ -31,7 +32,10 @@ function doPost(e) {
                 + Number(data.banginapally) * PRICES.banginapally
                 + Number(data.rasalu)       * PRICES.rasalu
                 + Number(data.himayat)      * PRICES.himayat
-                + Number(data.totapuri)     * PRICES.totapuri;
+                + Number(data.totapuri)     * PRICES.totapuri
+                + Number(data.payari)       * PRICES.payari
+                + Number(data.langra)       * PRICES.langra
+                + Number(data.dasheri)      * PRICES.dasheri;
 
     sheet.appendRow([
       data.timestamp,
@@ -45,6 +49,9 @@ function doPost(e) {
       data.rasalu       || 0,
       data.himayat      || 0,
       data.totapuri     || 0,
+      data.payari       || 0,
+      data.langra       || 0,
+      data.dasheri      || 0,
       data.pickup,
       data.comments || '',
       total,
@@ -71,6 +78,7 @@ function buildEmailHtml(data, orderId, total) {
   const lines = [
     ['Alphonso', data.alphonso], ['Kesar', data.kesar], ['Banganpally', data.banginapally],
     ['Rasalu', data.rasalu], ['Himayat', data.himayat], ['Totapuri', data.totapuri],
+    ['Payari', data.payari], ['Langra', data.langra], ['Dasheri', data.dasheri],
   ].filter(([, qty]) => Number(qty) > 0)
    .map(([name, qty]) => `<tr><td style="font-size:14px;padding:2px 0;">${name}: ${qty} box${qty > 1 ? 'es' : ''}</td></tr>`)
    .join('');
