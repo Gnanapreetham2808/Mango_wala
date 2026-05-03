@@ -76,7 +76,7 @@ function doPost(e) {
         result: 'success', 
         orderId: data.orderId,
         emailSent: emailSent,
-        message: emailSent ? 'Order booked successfully! Check your email for confirmation.' : 'Order booked successfully! ⚠️ Confirmation email could not be sent - please check your email shortly or contact us.'
+        message: emailSent ? 'Order booked successfully! Check your email for confirmation.' : 'Order booked successfully! ⚠️ Please take a screenshot — we were unable to deliver a confirmation email for some reason.'
       }))
       .setMimeType(ContentService.MimeType.JSON);
 
