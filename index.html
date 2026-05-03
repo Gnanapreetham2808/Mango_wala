@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EuropeMangoWale — Prebook 2026 Batch 01</title>
+  <title>EuropeMangoWale — Prebook 2026 Batch 02</title>
   <meta name="description" content="Prebook your premium Alphonso & Kesar mangoes for 2026 Season. Fresh from India, delivered in Europe." />
 
   <!-- Google Fonts -->
@@ -560,7 +560,7 @@
         and brings you our freshest mangoes straight from the farm. Reserve your box before stocks run out!
       </p>
       <div class="info-pills">
-        <span class="pill"><span class="pill-icon">📅</span> Pick Up: May 1 & 2</span>
+        <span class="pill"><span class="pill-icon">📅</span> Pick Up: May 15 & 16</span>
         <span class="pill"><span class="pill-icon">🚚</span> Limited Stock</span>
         <span class="pill"><span class="pill-icon">💳</span> Pay at Collection</span>
       </div>
@@ -618,7 +618,7 @@
             text-align:center; white-space:nowrap;
           ">
             <span style="display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.40); backdrop-filter:blur(8px); border-radius:999px; padding:5px 16px; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:white;">
-              🌟 2026 Season — Batch 01
+              🌟 2026 Season — Batch 02
             </span>
           </div>
         </div>
@@ -668,7 +668,7 @@
             <div class="form-group qty-group">
               <label for="alphonso">
                 <span class="qty-label-inner">
-                  🥭 Alphonso <span class="qty-badge">€32 / box (Approx 3 kg)</span>
+                  🥭 Alphonso <span class="qty-badge">€30 / box (Approx 3 kg)</span>
                 </span>
               </label>
               <input type="number" id="alphonso" name="alphonso" min="0" max="50" step="1" placeholder="Enter Quantity" />
@@ -678,7 +678,7 @@
             <div class="form-group qty-group">
               <label for="kesar">
                 <span class="qty-label-inner">
-                  🥭 Kesar <span class="qty-badge">€32 / box (Approx 3 kg)</span>
+                  🥭 Kesar <span class="qty-badge">€30 / box (Approx 3 kg)</span>
                 </span>
               </label>
               <input type="number" id="kesar" name="kesar" min="0" max="50" step="1" placeholder="Enter Quantity" />
@@ -688,7 +688,7 @@
             <div class="form-group qty-group">
               <label for="banginapally">
                 <span class="qty-label-inner">
-                  🥭 Banganpally <span class="qty-badge">€34 / box (Approx 4 kg)</span>
+                  🥭 Banganpally <span class="qty-badge">€33 / box (Approx 4 kg)</span>
                 </span>
               </label>
               <input type="number" id="banginapally" name="banginapally" min="0" max="50" step="1" placeholder="Enter Quantity" />
@@ -718,7 +718,7 @@
             <div class="form-group qty-group">
               <label for="totapuri">
                 <span class="qty-label-inner">
-                  🥭 Totapuri <span class="qty-badge">€35 / box (Approx 4 kg)</span>
+                  🥭 Totapuri <span class="qty-badge">€33 / box (Approx 3 kg)</span>
                 </span>
               </label>
               <input type="number" id="totapuri" name="totapuri" min="0" max="50" step="1" placeholder="Enter Quantity" />
@@ -776,6 +776,10 @@
                 <option value="Rotterdam">📍 Rotterdam</option>
                 <option value="The Hague">📍 The Hague</option>
                 <option value="Utrecht">📍 Utrecht</option>
+                <option value="Utrecht - Nieuwegein">📍 Utrecht - Nieuwegein</option>
+                <option value="Utrecht - Terwijde">📍 Utrecht - Terwijde</option>
+                <option value="Utrecht - Nova Mall">📍 Utrecht - Nova Mall</option>
+                <option value="Hilversum">📍 Hilversum</option>
                 <option value="Veldhoven">📍 Veldhoven</option>
                 <option value="Zaandam">📍 Zaandam</option>
                 <option value="Other">📍 Other (see comments)</option>
@@ -872,7 +876,7 @@
     const totalDisp     = document.getElementById('total-display');
     const totalAmt      = document.getElementById('total-amount');
 
-    const PRICES = { alphonso: 32, kesar: 32, banginapally: 34, rasalu: 35, himayat: 40, totapuri: 35, payari: 33, langra: 33, dasheri: 33 };
+    const PRICES = { alphonso: 30, kesar: 30, banginapally: 33, rasalu: 35, himayat: 40, totapuri: 33, payari: 33, langra: 33, dasheri: 33 };
 
     /* ── Live order total ───────────────────────────────────────── */
     function updateTotal() {
@@ -989,10 +993,12 @@
 
         /* Some Apps Script deployments return JSON; handle both */
         let success = true;
+        let emailSent = true;
         try {
           const json = JSON.parse(result);
           if (json.result === 'error') success = false;
           if (json.orderId) data.orderId = json.orderId; // use server-generated ID
+          if (json.emailSent !== undefined) emailSent = json.emailSent; // check email status
         } catch (_) { /* plain text response — treat as success */ }
 
         if (success) {
@@ -1022,7 +1028,7 @@
           ].filter(Boolean).join('\n');
 
           const successHTML = `<div style="text-align:left;width:100%;">
-            <p style="margin:0 0 8px;font-size:0.92rem;">🎉 <strong>Thanks for the order, Your booking is confirmed!</strong> An email has been sent with these details. Please check your spam/junk email as well.</p>
+            <p style="margin:0 0 8px;font-size:0.92rem;">🎉 <strong>Thanks for the order, Your booking is confirmed!</strong> ${emailSent ? 'An email has been sent with these details. Please check your spam/junk email as well.' : '⚠️ <span style="color:#c0392b;">Confirmation email could not be sent - please check your email shortly or contact us via WhatsApp.</span>'}</p>
             <pre style="margin:0 0 8px;font-size:0.82rem;white-space:pre-wrap;line-height:1.7;">${orderLines}</pre>
             <p style="margin:0 0 10px;font-size:0.75rem;color:#92400e;background:#fef3c7;border-radius:8px;padding:7px 12px;">📸 We suggest to take a screenshot of this confirmation.</p>
             <div style="background:linear-gradient(135deg,#075e54 0%,#128c7e 100%);border-radius:16px;padding:22px 24px;text-align:center;margin-top:6px;box-shadow:0 6px 24px rgba(7,94,84,0.50);">
@@ -1094,14 +1100,14 @@
         font-size: 1.25rem;
         color: #7c2d12;
         line-height: 1.4;
-      ">Batch 01 — Fully Booked!</h2>
+      ">Batch 02 — Fully Booked!</h2>
       <p style="
         margin: 0 0 1rem;
         font-size: 0.95rem;
         color: #374151;
         line-height: 1.65;
       ">
-        We're thrilled to share that <strong>Batch 01 orders are now fully booked</strong> — thank you for the incredible response! 🙌
+        We're thrilled to share that <strong>Batch 02 orders are now fully booked</strong> — thank you for the incredible response! 🙌
       </p>
       <p style="
         margin: 0 0 1rem;

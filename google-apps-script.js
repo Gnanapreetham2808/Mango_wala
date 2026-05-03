@@ -2,7 +2,7 @@
 // Deploy as a Web App (Execute as: Me, Who has access: Anyone)
 // Paste this entire file into your Apps Script editor and redeploy.
 
-const PRICES = { alphonso: 32, kesar: 32, banginapally: 34, rasalu: 35, himayat: 40, totapuri: 35, payari: 33, langra: 33, dasheri: 33 };
+const PRICES = { alphonso: 30, kesar: 30, banginapally: 33, rasalu: 35, himayat: 40, totapuri: 33, payari: 33, langra: 33, dasheri: 33 };
 
 function doPost(e) {
   try {
@@ -24,7 +24,7 @@ function doPost(e) {
     // ── Generate unique sequential order ID server-side ────────────────────
     const dataRows = sheet.getLastRow() - 1; // subtract header row
     const orderNum = 1001 + dataRows;
-    const orderId  = 'MANBAT-01-' + orderNum;
+    const orderId  = 'MANBAT-02-' + orderNum;
     data.orderId   = orderId;
 
     const total = Number(data.alphonso)     * PRICES.alphonso
@@ -57,14 +57,26 @@ function doPost(e) {
       total,
     ]);
 
-    MailApp.sendEmail({
-      to: data.email,
-      subject: `🥭 Booking Confirmed – ${orderId} | EuropeMangoWale`,
-      htmlBody: buildEmailHtml(data, orderId, total),
-    });
+    // ── Send Email (separately so booking is not lost if email fails) ───────
+    let emailSent = true;
+    try {
+      MailApp.sendEmail({
+        to: data.email,
+        subject: `🥭 Booking Confirmed – ${orderId} | EuropeMangoWale`,
+        htmlBody: buildEmailHtml(data, orderId, total),
+      });
+    } catch (emailErr) {
+      Logger.log('Email sending failed: ' + emailErr.message);
+      emailSent = false;
+    }
 
     return ContentService
-      .createTextOutput(JSON.stringify({ result: 'success', orderId: data.orderId }))
+      .createTextOutput(JSON.stringify({ 
+        result: 'success', 
+        orderId: data.orderId,
+        emailSent: emailSent,
+        message: emailSent ? 'Order booked successfully! Check your email for confirmation.' : 'Order booked successfully! ⚠️ Confirmation email could not be sent - please check your email shortly or contact us.'
+      }))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
@@ -104,7 +116,11 @@ function buildEmailHtml(data, orderId, total) {
     </div>
   </td></tr>
   <tr><td style="padding:0 32px 20px;text-align:center;">
-    <p style="margin:0;font-size:14px;color:#333;">See you soon, for more details on Mangoes delivery date/time, location wise point of contacts and regular updates — please join our WhatsApp community in location specific group.</p>
+    <div style="background:#e3f2fd;border-radius:8px;padding:14px 18px;margin-bottom:16px;border-left:4px solid #2196F3;">
+      <p style="margin:0;font-size:13px;font-weight:700;color:#1565c0;">📅 Batch-2 Collection Dates</p>
+      <p style="margin:6px 0 0;font-size:12px;color:#424242;line-height:1.6;"><strong>May 15:</strong> Eindhoven area<br><strong>May 16:</strong> Other locations<br><em style="color:#666;font-size:11px;">(Location-wise SPOC & timings updated 1 day in advance)</em></p>
+    </div>
+    <p style="margin:0;font-size:14px;color:#333;">For more details on delivery date/time, location wise point of contacts and regular updates — please join our WhatsApp community in location specific group.</p>
   </td></tr>
   <tr><td style="padding:0 32px 28px;">
     <div style="background:linear-gradient(135deg,#075e54 0%,#128c7e 100%);border-radius:12px;padding:20px 24px;text-align:center;">
