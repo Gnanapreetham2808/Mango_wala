@@ -2,7 +2,7 @@
 // Deploy as a Web App (Execute as: Me, Who has access: Anyone)
 // Paste this entire file into your Apps Script editor and redeploy.
 
-const PRICES = { alphonso: 30, kesar: 30, banginapally: 33, rasalu: 35, himayat: 40, totapuri: 33, payari: 33, langra: 33, dasheri: 33 };
+const PRICES = { alphonso: 30, kesar: 30, banginapally: 33, rasalu: 35, himayat: 38, totapuri: 33, payari: 33, langra: 33, dasheri: 33 };
 
 function doPost(e) {
   try {
