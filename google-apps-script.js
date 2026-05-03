@@ -16,7 +16,7 @@ function doPost(e) {
       sheet.appendRow([
         'Timestamp', 'Order ID', 'Name', 'Email', 'Phone',
         'Alphonso Boxes', 'Kesar Boxes', 'Banganpally Boxes', 'Rasalu Boxes', 'Himayat Boxes', 'Totapuri Boxes',
-        'Payari Boxes', 'Langra Boxes', 'Dasheri Boxes',
+        'Payari Boxes', 'Langra Boxes', 'Dasheri Boxes', 'Total Boxes',
         'Pickup Location', 'Comments', 'Total (€)'
       ]);
     }
@@ -52,6 +52,7 @@ function doPost(e) {
       data.payari       || 0,
       data.langra       || 0,
       data.dasheri      || 0,
+      (Number(data.alphonso) + Number(data.kesar) + Number(data.banginapally) + Number(data.rasalu) + Number(data.himayat) + Number(data.totapuri) + Number(data.payari) + Number(data.langra) + Number(data.dasheri)),
       data.pickup,
       data.comments || '',
       total,
